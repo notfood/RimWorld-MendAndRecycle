@@ -76,17 +76,7 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <startElectricalFires>true</startElectricalFires>
-        <basePowerConsumption>400</basePowerConsumption>
-      </li>
-      <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>5.0</fuelConsumptionRate>
-        <fuelCapacity>5.0</fuelCapacity>
-        <fuelFilter>
-          <thingDefs>
-            <li>MendingKit</li>
-          </thingDefs>
-        </fuelFilter>
-        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <basePowerConsumption>200</basePowerConsumption>
       </li>
       <li Class="CompProperties_Flickable"/>
       <li Class="CompProperties_AffectedByFacilities">
