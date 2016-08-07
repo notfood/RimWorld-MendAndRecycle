@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mending", "Mending.csproj", "{447D30B4-F151-4217-8740-92065F404415}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{447D30B4-F151-4217-8740-92065F404415}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{447D30B4-F151-4217-8740-92065F404415}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{447D30B4-F151-4217-8740-92065F404415}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{447D30B4-F151-4217-8740-92065F404415}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

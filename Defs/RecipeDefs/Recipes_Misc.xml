@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RecipeDefs>
+
+  <RecipeDef>
+    <defName>MendSimpleApparel</defName>
+    <label>mend simple apparel</label>
+    <description>Mend simple apparel.</description>
+    <jobString>Mending.</jobString>
+    <workAmount>100</workAmount>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Tailor</effectWorking>
+    <soundWorking>Recipe_Tailor</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Apparel</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Apparel</li>
+      </categories>
+      <exceptedCategories>
+        <li>Headgear</li>
+      </exceptedCategories>
+      <exceptedThingDefs>
+        <li>Apparel_VestPlate</li>
+        <li>Apparel_PowerArmor</li>
+        <li>Apparel_PersonalShield</li>
+      </exceptedThingDefs>
+    </fixedIngredientFilter>
+    <skillRequirements>
+        <li>
+            <skill>Crafting</skill>
+            <minLevel>4</minLevel>
+        </li>
+    </skillRequirements>
+  </RecipeDef>
+  
+  <RecipeDef>
+    <defName>MendComplexApparel</defName>
+    <label>mend complex apparel</label>
+    <description>Mend armor.</description>
+    <jobString>Mending.</jobString>
+    <workAmount>200</workAmount>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Smith</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Headgear</li>
+          </categories>
+          <thingDefs>
+            <li>Apparel_VestPlate</li>
+            <li>Apparel_PowerArmor</li>
+            <li>Apparel_PersonalShield</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Headgear</li>
+      </categories>
+      <thingDefs>
+        <li>Apparel_VestPlate</li>
+        <li>Apparel_PowerArmor</li>
+        <li>Apparel_PersonalShield</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <skillRequirements>
+        <li>
+            <skill>Crafting</skill>
+            <minLevel>8</minLevel>
+        </li>
+    </skillRequirements>
+  </RecipeDef>
+  
+  <RecipeDef>
+    <defName>MendSimpleWeapon</defName>
+    <label>repair simple weapon</label>
+    <description>Repair weapon.</description>
+    <jobString>Repairing.</jobString>
+    <workAmount>50</workAmount>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Smith</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>WeaponsMelee</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>WeaponsMelee</li>
+      </categories>
+    </fixedIngredientFilter>
+    <skillRequirements>
+        <li>
+            <skill>Crafting</skill>
+            <minLevel>4</minLevel>
+        </li>
+    </skillRequirements>
+  </RecipeDef>
+  
+  <RecipeDef>
+    <defName>MendComplexWeapon</defName>
+    <label>repair complex weapon</label>
+    <description>Repair weapon.</description>
+    <jobString>Repairing.</jobString>
+    <workAmount>200</workAmount>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Smith</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>WeaponsRanged</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>WeaponsRanged</li>
+      </categories>
+    </fixedIngredientFilter>
+    <skillRequirements>
+        <li>
+            <skill>Crafting</skill>
+            <minLevel>8</minLevel>
+        </li>
+    </skillRequirements>
+  </RecipeDef>
+  
+  <!-- We can do any ingredients, even food -->
+  <!--
+  <RecipeDef>
+    <defName>MendProsthetics</defName>
+    <label>repair prosthetics</label>
+    <description>Repair prosthetics.</description>
+    <jobString>Repairing.</jobString>
+    <workAmount>50</workAmount>
+    <effectWorking>Repair</effectWorking>
+    <soundWorking>Recipe_Surgery</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>BodyPartsArtificial</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>BodyPartsArtificial</li>
+      </categories>
+    </fixedIngredientFilter>
+  </RecipeDef>
+  -->
+  
+</RecipeDefs>

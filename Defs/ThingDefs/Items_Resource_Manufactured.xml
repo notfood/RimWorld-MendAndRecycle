@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>MendingKit</defName>
+    <label>mending kit</label>
+    <description>Miscellaneous cloth, bits and parts. Necessary for repairing weapons and mending apparel.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/MendingKit</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <stackLimit>25</stackLimit>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <MarketValue>10</MarketValue>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+  </ThingDef>
+  
+</Defs>

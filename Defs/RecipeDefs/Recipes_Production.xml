@@ -1,0 +1,52 @@
+<RecipeDefs>
+
+  <RecipeDef>
+    <defName>MakeMendingKit</defName>
+    <label>make mending kits</label>
+    <description>Crafts mending kits from materials. Produces enough to re-stock the mending table.</description>
+    <jobString>Crafting meding kit.</jobString>
+    <workAmount>500</workAmount>
+    <workSpeedStat>SmithingSpeed</workSpeedStat>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Smith</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>45</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Cloth</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Steel</li>
+        <li>Cloth</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <MendingKit>5</MendingKit>
+    </products>
+    <skillRequirements>
+        <li>
+            <skill>Crafting</skill>
+            <minLevel>4</minLevel>
+        </li>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+    <recipeUsers>
+        <li>ElectricTailoringBench</li>
+    </recipeUsers>
+    <researchPrerequisite>Mending</researchPrerequisite>
+  </RecipeDef>
+
+</RecipeDefs>

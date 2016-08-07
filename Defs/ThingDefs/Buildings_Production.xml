@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="BenchBase">
+    <DefName>TableMending</DefName>
+    <label>mending workbench</label>
+    <ThingClass>Building_WorkTable</ThingClass>
+    <Description>A workbench equipped with all the tools required to mend and repair damaged items. Requires power and consumes mending kits. Mending kits can be made in the electric tailoring workbench</Description>
+    <graphicData>
+      <texPath>Things/Buildings/TableMending</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,1)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <CostList>
+      <Steel>50</Steel>
+      <Component>3</Component>
+    </CostList>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>75</costStuffCount>
+    <AltitudeLayer>Building</AltitudeLayer>
+    <fillPercent>0.5</fillPercent>
+    <useHitPoints>True</useHitPoints>
+    <statBases>
+      <WorkToMake>2500</WorkToMake>
+      <MaxHitPoints>180</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Cleanliness>-5</Cleanliness>
+    </statBases>
+    <Size>(3,1)</Size>
+    <DesignationCategory>Production</DesignationCategory>
+    <Passability>PassThroughOnly</Passability>
+    <pathCost>70</pathCost>
+    <hasInteractionCell>True</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <surfaceType>Item</surfaceType>
+     <recipes>
+      <li>MendSimpleApparel</li>
+      <li>MendComplexApparel</li>
+      <li>MendSimpleWeapon</li>
+      <li>MendComplexWeapon</li>
+      <!-- It isn't necesary to place the recipes here, they can go into other tables -->
+      <!--<li>MendProsthetics</li>-->
+    </recipes>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+    </inspectorTabs>
+    <building>
+      <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+    </building>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <startElectricalFires>true</startElectricalFires>
+        <basePowerConsumption>400</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>5.0</fuelConsumptionRate>
+        <fuelCapacity>5.0</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>MendingKit</li>
+          </thingDefs>
+        </fuelFilter>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>ToolCabinet</li>
+        </linkableFacilities>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="Mending.CompProperties_FilterRoofed"/>
+    </comps>
+    <designationHotKey>Misc2</designationHotKey>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>Mending</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+</Defs>
