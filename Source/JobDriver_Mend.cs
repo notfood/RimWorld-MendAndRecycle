@@ -109,7 +109,7 @@ namespace Mending
 			};
 			toil.defaultCompleteMode = ToilCompleteMode.Never;
 			toil.WithEffect (() => curJob.bill.recipe.effectWorking, mendTableTI);
-			toil.WithSustainer (() => toil.actor.CurJob.bill.recipe.soundWorking);
+			toil.PlaySustainerOrSound (() => toil.actor.CurJob.bill.recipe.soundWorking);
 			toil.WithProgressBar(mendTableTI, delegate {
 				return (float)mendObject.HitPoints / (float)mendObject.MaxHitPoints;
 			}, false, 0.5f);
