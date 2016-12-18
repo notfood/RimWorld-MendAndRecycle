@@ -36,7 +36,7 @@ namespace Mending
 			if (!pawn.CanReach (thing.InteractionCell, PathEndMode.OnCell, Danger.Some, false, TraverseMode.ByPawn)) {
 				return null;
 			}
-			billGiver.BillStack.RemoveInvalidBills ();
+			billGiver.BillStack.RemoveIncompletableBills ();
 			return this.StartOrResumeBillJob (pawn, billGiver);
 		}
 
@@ -73,7 +73,7 @@ namespace Mending
 
 		private static bool TryFindBestBillIngredients(Bill bill, Pawn pawn, Thing billGiver, out Thing chosen) {
 			IntVec3 billGiverRootCell = GetBillGiverRootCell (billGiver, pawn);
-			Region validRegionAt = Find.RegionGrid.GetValidRegionAt (billGiverRootCell);
+			Region validRegionAt = pawn.Map.regionGrid.GetValidRegionAt (billGiverRootCell);
 			if (validRegionAt == null) {
 				chosen = null;
 				return false;
@@ -83,7 +83,7 @@ namespace Mending
 
 			Predicate<Thing> baseValidator = (Thing t) => t.Spawned && !t.IsForbidden (pawn)
 				&& t.HitPoints < t.MaxHitPoints && t.HitPoints > 0
-				&& (menderBuildingComp == null || !menderBuildingComp.restrictInside || Find.RoofGrid.Roofed (t.Position))
+				&& (menderBuildingComp == null || !menderBuildingComp.restrictInside || pawn.Map.roofGrid.Roofed (t.Position))
 				&& bill.recipe.fixedIngredientFilter.Allows (t) && bill.ingredientFilter.Allows (t)
 				&& bill.recipe.ingredients.Any ((IngredientCount ingNeed) => ingNeed.filter.Allows (t))
 				&& pawn.CanReserve (t, 1)
@@ -91,6 +91,7 @@ namespace Mending
 
 			chosen = GenClosest.ClosestThingReachable (
 				billGiverRootCell,
+				pawn.Map,
 				ThingRequest.ForGroup (ThingRequestGroup.HaulableEver),
 				PathEndMode.Touch,
 				TraverseParms.For (pawn, Danger.Deadly, TraverseMode.ByPawn, false),
@@ -121,7 +122,7 @@ namespace Mending
 			}
 
 			Job job2 = new Job (LocalJobDefs.Mending, (Thing) giver, chosen);
-			job2.maxNumToCarry = 1;
+			job2.count = 1;
 			job2.haulMode = HaulMode.ToCellNonStorage;
 			job2.bill = bill;
 			return job2;

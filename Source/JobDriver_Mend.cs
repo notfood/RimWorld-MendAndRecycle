@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 using RimWorld;
 using Verse;
@@ -17,6 +18,9 @@ namespace Mending
 
 		private float workCycle;
 		private float workCycleProgress;
+		private ChanceDef failChance;
+
+		private FieldInfo compQualityInt = typeof(CompQuality).GetField ("qualityInt", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
 		protected override IEnumerable<Toil> MakeNewToils ()
 		{
@@ -68,6 +72,9 @@ namespace Mending
 			Toil toil = new Toil ();
 			toil.initAction = delegate {
 				curJob.bill.Notify_DoBillStarted ();
+
+				this.failChance = ChanceDef.GetFor(mendObject);
+
 				this.workCycleProgress = this.workCycle = Math.Max(curJob.bill.recipe.workAmount, 10f);
 			};
 			toil.tickAction = delegate {
@@ -76,7 +83,7 @@ namespace Mending
 				}
 
 				workCycleProgress -= StatExtension.GetStatValue (actor, StatDefOf.WorkToMake, true);
-				mendTable.BillTick();
+				mendTable.Tick();
 				if (!mendTable.UsableNow) {
 					actor.jobs.EndCurrentJob (JobCondition.Incompletable);
 				}
@@ -89,7 +96,19 @@ namespace Mending
 
 					SkillRecord skill = actor.skills.GetSkill (SkillDefOf.Crafting);
 					if (skill != null) {
-						skill.Learn (skill.LearningFactor);
+						skill.Learn (0.11f);
+
+
+						CompQuality qualityComponent = mendObject.TryGetComp<CompQuality>();
+						if (qualityComponent != null && qualityComponent.Quality > QualityCategory.Awful) {
+							QualityCategory qc = qualityComponent.Quality;
+
+							if (failChance != null && Rand.Value < failChance.Chance(qc, skill.Level)) {
+								compQualityInt.SetValue(qualityComponent, qualityComponent.Quality - 1);
+
+								MoteMaker.ThrowText(actor.DrawPos, actor.Map, "Failed");
+							}
+						}
 					}
 
 					if (mendObject.HitPoints == mendObject.MaxHitPoints) {
@@ -126,16 +145,16 @@ namespace Mending
 
 				if (curJob.bill.GetStoreMode () != BillStoreMode.DropOnFloor) {
 					IntVec3 vec;
-					if (StoreUtility.TryFindBestBetterStoreCellFor (mendObject, actor, StoragePriority.Unstored, actor.Faction, out vec, true)) {
-						actor.carrier.TryStartCarry (mendObject);
+					if (StoreUtility.TryFindBestBetterStoreCellFor (mendObject, actor, actor.Map, StoragePriority.Unstored, actor.Faction, out vec, true)) {
+						actor.carryTracker.TryStartCarry (mendObject);
 						curJob.SetTarget(mendHaulTI, vec);
-						curJob.maxNumToCarry = 99999;
+						curJob.count = 99999;
 						return;
 					}
 				}
 					
-				actor.carrier.TryStartCarry (mendObject);
-				actor.carrier.TryDropCarriedThing(actor.Position, ThingPlaceMode.Near, out mendObject);
+				actor.carryTracker.TryStartCarry (mendObject);
+				actor.carryTracker.TryDropCarriedThing(actor.Position, ThingPlaceMode.Near, out mendObject);
 
 				actor.jobs.EndCurrentJob (JobCondition.Succeeded);
 			};

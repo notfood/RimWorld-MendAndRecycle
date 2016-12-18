@@ -19,7 +19,7 @@ namespace Mending
 			Scribe_Values.LookValue<bool> (ref this.restrictInside, "outsideItems", false, true);
 		}
 
-		public override IEnumerable<Command> CompGetGizmosExtra ()
+		public override IEnumerable<Gizmo> CompGetGizmosExtra ()
 		{
 			foreach (var current in base.CompGetGizmosExtra())
 				yield return current;

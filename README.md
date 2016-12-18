@@ -1,6 +1,6 @@
 # RimWorld-Mending
 
-[![Version](https://img.shields.io/badge/Rimworld-A14-green.svg)]
+[![Version](https://img.shields.io/badge/Rimworld-A16-green.svg)]
 (http://rimworldgame.com/)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue.svg)]
 (http://creativecommons.org/licenses/by-nc-sa/4.0/)
