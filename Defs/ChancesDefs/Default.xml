@@ -10,15 +10,15 @@
             </categories>
         </match>
         <chances>
-            <awful>0.01</awful>
-            <shoddy>0.01</shoddy>
-            <poor>0.01</poor>
-            <normal>0.02</normal>
-            <good>0.02</good>
-            <superior>0.04</superior>
-            <excellent>0.04</excellent>
-            <masterwork>0.05</masterwork>
-            <legendary>0.05</legendary>
+            <awful>0.04</awful>
+            <shoddy>0.03</shoddy>
+            <poor>0.03</poor>
+            <normal>0.03</normal>
+            <good>0.03</good>
+            <superior>0.02</superior>
+            <excellent>0.02</excellent>
+            <masterwork>0.01</masterwork>
+            <legendary>0</legendary>
         </chances>
     </Mending.ChanceDef>
     
@@ -36,15 +36,15 @@
             <max>Industrial</max>
         </techLevel>
         <chances>
-            <awful>0.01</awful>
-            <shoddy>0.01</shoddy>
-            <poor>0.01</poor>
-            <normal>0.01</normal>
-            <good>0.01</good>
-            <superior>0.01</superior>
+            <awful>0.03</awful>
+            <shoddy>0.03</shoddy>
+            <poor>0.03</poor>
+            <normal>0.03</normal>
+            <good>0.02</good>
+            <superior>0.02</superior>
             <excellent>0.01</excellent>
-            <masterwork>0.02</masterwork>
-            <legendary>0.03</legendary>
+            <masterwork>0.01</masterwork>
+            <legendary>0</legendary>
         </chances>
     </Mending.ChanceDef>
 </Defs>

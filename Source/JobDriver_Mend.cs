@@ -54,20 +54,31 @@ namespace Mending
 					}
 
 					SkillRecord skill = actor.skills.GetSkill (SkillDefOf.Crafting);
-					if (skill != null) {
-						skill.Learn (0.11f);
 
-						CompQuality qualityComponent = objectThing.TryGetComp<CompQuality>();
-						if (qualityComponent != null && qualityComponent.Quality > QualityCategory.Awful) {
-							QualityCategory qc = qualityComponent.Quality;
+					if (skill == null) {
+						Log.Error("Mending :: This should never happen! skill == null");
 
-							if (failChance != null && Rand.Value < failChance.Chance(qc, skill.Level)) {
-								compQualityInt.SetValue(qualityComponent, qualityComponent.Quality - 1);
+						actor.jobs.EndCurrentJob (JobCondition.Incompletable);
 
-								objectThing.HitPoints -= fixedFailedDamage;
+						return;
+					}
 
-								MoteMaker.ThrowText(actor.DrawPos, actor.Map, "Failed");
-							}
+					float skillPerc = (float) skill.Level / 20f;
+
+					skill.Learn (0.11f);
+
+					CompQuality qualityComponent = objectThing.TryGetComp<CompQuality>();
+					if (qualityComponent != null && qualityComponent.Quality > QualityCategory.Awful) {
+						QualityCategory qc = qualityComponent.Quality;
+
+						float skillFactor = Mathf.Lerp(1.5f, 0f, skillPerc);
+
+						if (failChance != null && Rand.Value < failChance.Chance(qc) * skillFactor) {
+							compQualityInt.SetValue(qualityComponent, qualityComponent.Quality - 1);
+
+							objectThing.HitPoints -= fixedFailedDamage;
+
+							MoteMaker.ThrowText(actor.DrawPos, actor.Map, "Failed");
 						}
 					}
 
@@ -75,7 +86,6 @@ namespace Mending
 
 					if (objectThing.HitPoints <= 0) {
 						// recycling whats left...
-						float skillPerc = (float) skill.Level / 20f;
 						float skillFactor = Mathf.Lerp(0.5f, 1.5f, skillPerc);
 
 						var list = JobDriverUtils.Reclaim(objectThing, skillFactor * 0.1f);

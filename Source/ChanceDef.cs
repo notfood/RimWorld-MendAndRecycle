@@ -40,11 +40,6 @@ namespace Mending
 				&& match.Allows (thing);
 		}
 
-		public float Chance(QualityCategory qc, int level) {
-			float factor = ((21 - level) * levelFactor);
-			return Chance (qc) * factor;
-		}
-
 		public float Chance(QualityCategory qc) {
 			switch ( qc )
 			{

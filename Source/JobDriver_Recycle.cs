@@ -57,17 +57,27 @@ namespace Mending
 						processedHitPoints += fixedHitPointsPerCycle/2;
 					}
 
-					if (skill != null) {
-						skill.Learn (0.11f);
+					if (skill == null) {
+						Log.Error("Mending :: This should never happen! skill == null");
 
-						if (qualityComponent != null && qualityComponent.Quality > QualityCategory.Awful) {
-							QualityCategory qc = qualityComponent.Quality;
+						actor.jobs.EndCurrentJob (JobCondition.Incompletable);
 
-							if (failChance != null && Rand.Value < failChance.Chance(qc, skill.Level)) {
-								objectThing.HitPoints -= fixedFailedDamage;
+						return;
+					}
 
-								MoteMaker.ThrowText(actor.DrawPos, actor.Map, "Failed");
-							}
+					float skillPerc = (float) skill.Level / 20f;
+
+					skill.Learn (0.11f);
+
+					if (qualityComponent != null && qualityComponent.Quality > QualityCategory.Awful) {
+						QualityCategory qc = qualityComponent.Quality;
+
+						float skillFactor = Mathf.Lerp(0.5f, 1.5f, skillPerc);
+
+						if (failChance != null && Rand.Value < failChance.Chance(qc) * skillFactor) {
+							objectThing.HitPoints -= fixedFailedDamage;
+
+							MoteMaker.ThrowText(actor.DrawPos, actor.Map, "Failed");
 						}
 					}
 
@@ -77,7 +87,6 @@ namespace Mending
 						pawn.Map.reservationManager.Release(curJob.targetB, pawn);
 						objectThing.Destroy(DestroyMode.Vanish);
 
-						float skillPerc = (float) skill.Level / 20f;
 						float skillFactor = Mathf.Lerp(0.5f, 1.5f, skillPerc);
 						float healthPerc = (float) processedHitPoints / (float) objectThing.MaxHitPoints;
 						float healthFactor = Mathf.Lerp(0f, 0.4f, healthPerc);
