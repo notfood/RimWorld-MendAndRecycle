@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <Mending.ChanceDef>
+        <defName>Default</defName>
+        <match>
+            <categories>
+                <li>Apparel</li>
+                <li>WeaponsMelee</li>
+                <li>WeaponsRanged</li>
+            </categories>
+        </match>
+        <chances>
+            <awful>0.02</awful>
+            <shoddy>0.02</shoddy>
+            <poor>0.02</poor>
+            <normal>0.04</normal>
+            <good>0.04</good>
+            <superior>0.06</superior>
+            <excellent>0.06</excellent>
+            <masterwork>0.08</masterwork>
+            <legendary>0.1</legendary>
+        </chances>
+    </Mending.ChanceDef>
+    
+    <Mending.ChanceDef>
+        <defName>IndustrialAndBelow</defName>
+        <match>
+            <categories>
+                <li>Apparel</li>
+                <li>WeaponsMelee</li>
+                <li>WeaponsRanged</li>
+            </categories>
+        </match>
+        <techLevel>
+            <min>Undefined</min>
+            <max>Industrial</max>
+        </techLevel>
+        <chances>
+            <awful>0.01</awful>
+            <shoddy>0.01</shoddy>
+            <poor>0.01</poor>
+            <normal>0.02</normal>
+            <good>0.02</good>
+            <superior>0.04</superior>
+            <excellent>0.04</excellent>
+            <masterwork>0.05</masterwork>
+            <legendary>0.05</legendary>
+        </chances>
+    </Mending.ChanceDef>
+</Defs>

@@ -1,37 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 using UnityEngine;
-using RimWorld;
 using Verse;
 using Verse.AI;
+using RimWorld;
 
 namespace Mending
 {
-	public class JobDriver_Mend : JobDriver_DoBill
+	public class JobDriver_Recycle : JobDriver_DoBill
 	{
 		private const int fixedHitPointsPerCycle = 5;
 		private const int fixedFailedDamage = 50;
 
+		private int processedHitPoints;
 		private float workCycle;
 		private float workCycleProgress;
 		private ChanceDef failChance;
 
-		private FieldInfo compQualityInt = typeof(CompQuality).GetField ("qualityInt", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-		private FieldInfo ApparelWornByCorpseInt = typeof(Apparel).GetField("wornByCorpseInt", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-
 		protected override Toil DoBill()
 		{
 			Pawn actor = GetActor();
+			SkillRecord skill = actor.skills.GetSkill (SkillDefOf.Crafting);
 			Job curJob = actor.jobs.curJob;
 			Thing objectThing = curJob.GetTarget(objectTI).Thing;
+			CompQuality qualityComponent = objectThing.TryGetComp<CompQuality>();
 			Building_WorkTable tableThing = curJob.GetTarget(tableTI).Thing as Building_WorkTable;
 
 			Toil toil = new Toil ();
 			toil.initAction = delegate {
 				curJob.bill.Notify_DoBillStarted ();
 
+				this.processedHitPoints = 0;
 				this.failChance = ChanceDef.GetFor(objectThing);
 
 				this.workCycleProgress = this.workCycle = Math.Max(curJob.bill.recipe.workAmount, 10f);
@@ -42,28 +42,22 @@ namespace Mending
 				}
 
 				workCycleProgress -= StatExtension.GetStatValue (actor, StatDefOf.WorkToMake, true);
-
+				tableThing.Tick();
 				if (!tableThing.UsableNow) {
 					actor.jobs.EndCurrentJob (JobCondition.Incompletable);
 				}
 
 				if (workCycleProgress <= 0) {
-					int remainingHitPoints = objectThing.MaxHitPoints - objectThing.HitPoints;
-					if (remainingHitPoints > 0) {
-						objectThing.HitPoints += (int) Math.Min(remainingHitPoints, fixedHitPointsPerCycle);
-					}
+					objectThing.HitPoints -= fixedHitPointsPerCycle;
+					processedHitPoints += fixedHitPointsPerCycle;
 
-					SkillRecord skill = actor.skills.GetSkill (SkillDefOf.Crafting);
 					if (skill != null) {
 						skill.Learn (0.11f);
 
-						CompQuality qualityComponent = objectThing.TryGetComp<CompQuality>();
 						if (qualityComponent != null && qualityComponent.Quality > QualityCategory.Awful) {
 							QualityCategory qc = qualityComponent.Quality;
 
 							if (failChance != null && Rand.Value < failChance.Chance(qc, skill.Level)) {
-								compQualityInt.SetValue(qualityComponent, qualityComponent.Quality - 1);
-
 								objectThing.HitPoints -= fixedFailedDamage;
 
 								MoteMaker.ThrowText(actor.DrawPos, actor.Map, "Failed");
@@ -74,14 +68,15 @@ namespace Mending
 					actor.GainComfortFromCellIfPossible ();
 
 					if (objectThing.HitPoints <= 0) {
-						// recycling whats left...
-						float skillPerc = (float) skill.Level / 20f;
-						float skillFactor = Mathf.Lerp(0.5f, 1.5f, skillPerc);
-
-						var list = JobDriverUtils.Reclaim(objectThing, skillFactor * 0.1f);
-
 						pawn.Map.reservationManager.Release(curJob.targetB, pawn);
 						objectThing.Destroy(DestroyMode.Vanish);
+
+						float skillPerc = (float) skill.Level / 20f;
+						float skillFactor = Mathf.Lerp(0.5f, 1.5f, skillPerc);
+						float healthPerc = (float) processedHitPoints / (float) objectThing.MaxHitPoints;
+						float healthFactor = Mathf.Lerp(0f, 0.4f, healthPerc);
+
+						var list = JobDriverUtils.Reclaim(objectThing, skillFactor * healthFactor);
 
 						if (list.Count > 1) {
 							for (int j = 1; j < list.Count; j++) {
@@ -90,32 +85,15 @@ namespace Mending
 								}
 							}
 						}
+
 						list[0].SetPositionDirect (actor.Position);
 
-						curJob.targetB = list[0];
 						curJob.bill.Notify_IterationCompleted (actor, list);
+						curJob.targetB = list[0];
 
 						pawn.Map.reservationManager.Reserve(pawn, curJob.targetB, 1);
 
 						ReadyForNextToil();
-
-					} else if (objectThing.HitPoints == objectThing.MaxHitPoints) {
-						// fixed!
-
-						Apparel mendApparel = objectThing as Apparel;
-						if (mendApparel != null) {
-							ApparelWornByCorpseInt.SetValue(mendApparel, false);
-						}
-
-						List<Thing> list = new List<Thing> ();
-						list.Add(objectThing);
-						curJob.bill.Notify_IterationCompleted (actor, list);
-
-						ReadyForNextToil();
-
-					} else if (objectThing.HitPoints > objectThing.MaxHitPoints) {
-						Log.Error("Mending :: This should never happen! HitPoints > MaxHitPoints");
-						actor.jobs.EndCurrentJob (JobCondition.Incompletable);
 					}
 
 					workCycleProgress = workCycle;
@@ -127,14 +105,12 @@ namespace Mending
 			toil.WithProgressBar(tableTI, delegate {
 				return (float)objectThing.HitPoints / (float)objectThing.MaxHitPoints;
 			}, false, 0.5f);
-			toil.FailOn(() => {
-				IBillGiver billGiver = curJob.GetTarget (tableTI).Thing as IBillGiver;
-
-				return curJob.bill.suspended || curJob.bill.DeletedOrDereferenced || (billGiver != null && !billGiver.CurrentlyUsable ());
+			toil.FailOn (() => {
+				return toil.actor.CurJob.bill.suspended || !tableThing.UsableNow;
 			});
 			return toil;
 		}
 
-
 	}
 }
+

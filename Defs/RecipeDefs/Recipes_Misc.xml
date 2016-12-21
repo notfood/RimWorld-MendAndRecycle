@@ -175,4 +175,36 @@
   </RecipeDef>
   -->
   
+  <RecipeDef>
+    <defName>RecycleApparel</defName>
+    <label>recycle apparel</label>
+    <description>Recycle apparel into their basic components.</description>
+    <jobString>Recycling.</jobString>
+    <workAmount>100</workAmount>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Tailor</effectWorking>
+    <soundWorking>Recipe_Tailor</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Apparel</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Apparel</li>
+      </categories>
+    </fixedIngredientFilter>
+    <skillRequirements>
+        <li>
+            <skill>Crafting</skill>
+            <minLevel>2</minLevel>
+        </li>
+    </skillRequirements>
+  </RecipeDef>
+  
 </RecipeDefs>

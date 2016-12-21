@@ -18,6 +18,23 @@
     <prioritizeSustains>true</prioritizeSustains>
   </WorkGiverDef>
 
+  <WorkGiverDef>
+    <defName>DoBillsRecycling</defName>
+    <label>recycle</label>
+    <giverClass>Mending.WorkGiver_Recycle</giverClass>
+    <workType>Crafting</workType>
+    <priorityInType>90</priorityInType>
+    <fixedBillGiverDefs>
+      <li>TableRecycle</li>
+    </fixedBillGiverDefs>
+    <verb>recycle</verb>
+    <gerund>recycling</gerund>
+     <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+
 </WorkGivers>
 
 
