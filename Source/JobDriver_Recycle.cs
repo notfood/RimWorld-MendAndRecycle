@@ -26,6 +26,7 @@ namespace Mending
 			Thing objectThing = curJob.GetTarget(objectTI).Thing;
 			CompQuality qualityComponent = objectThing.TryGetComp<CompQuality>();
 			Building_WorkTable tableThing = curJob.GetTarget(tableTI).Thing as Building_WorkTable;
+			CompPowerTrader tablePowerTraderComp = tableThing.GetComp<CompPowerTrader>();
 
 			Toil toil = new Toil ();
 			toil.initAction = delegate {
@@ -49,7 +50,12 @@ namespace Mending
 
 				if (workCycleProgress <= 0) {
 					objectThing.HitPoints -= fixedHitPointsPerCycle;
-					processedHitPoints += fixedHitPointsPerCycle;
+
+					if (tablePowerTraderComp != null && tablePowerTraderComp.PowerOn) {
+						processedHitPoints += fixedHitPointsPerCycle;
+					} else {
+						processedHitPoints += fixedHitPointsPerCycle/2;
+					}
 
 					if (skill != null) {
 						skill.Learn (0.11f);

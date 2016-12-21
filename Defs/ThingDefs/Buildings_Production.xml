@@ -109,7 +109,7 @@
     <DefName>TableRecycle</DefName>
     <label>recycle workbench</label>
     <ThingClass>Building_WorkTable</ThingClass>
-    <Description>A workbench equipped with all the tools required to recycle items and recover their components. Requires power.</Description>
+    <Description>A workbench equipped with all the tools required to recycle items and recover their components. Power is optional, it doubles the efficiency.</Description>
     <graphicData>
       <texPath>Things/Buildings/TableRecycle</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -154,6 +154,7 @@
     </inspectorTabs>
     <building>
       <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+      <unpoweredWorkTableWorkSpeedFactor>0.5</unpoweredWorkTableWorkSpeedFactor>
     </building>
     <comps>
       <li Class="CompProperties_Power">
@@ -169,12 +170,12 @@
       </li>
       <li Class="CompProperties_Breakdownable"/>
     </comps>
-    <designationHotKey>Misc2</designationHotKey>
+    <designationHotKey>Misc3</designationHotKey>
     <placeWorkers>
       <li>PlaceWorker_ShowFacilitiesConnections</li>
     </placeWorkers>
     <researchPrerequisites>
-      <li>Mending</li>
+      <li>ComplexClothing</li>
     </researchPrerequisites>
   </ThingDef>
 
