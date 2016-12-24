@@ -41,7 +41,6 @@
     <Compile Include="Textures.cs" />
     <Compile Include="JobDriver_Mend.cs" />
     <Compile Include="ChanceDef.cs" />
-    <Compile Include="SpecialThingFilterWorker_Unroofed.cs" />
     <Compile Include="JobDriver_Recycle.cs" />
     <Compile Include="JobDriverUtils.cs" />
     <Compile Include="WorkGiver_Recycle.cs" />
