@@ -67,7 +67,7 @@ namespace Mending
 
 					float skillPerc = (float) skill.Level / 20f;
 
-					skill.Learn (0.11f);
+					skill.Learn (0.33f);
 
 					if (qualityComponent != null && qualityComponent.Quality > QualityCategory.Awful) {
 						QualityCategory qc = qualityComponent.Quality;

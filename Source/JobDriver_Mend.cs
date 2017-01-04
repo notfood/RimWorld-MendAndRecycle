@@ -18,7 +18,6 @@ namespace Mending
 		private float workCycleProgress;
 		private ChanceDef failChance;
 
-		private FieldInfo compQualityInt = typeof(CompQuality).GetField ("qualityInt", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 		private FieldInfo ApparelWornByCorpseInt = typeof(Apparel).GetField("wornByCorpseInt", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
 		protected override Toil DoBill()
@@ -65,7 +64,7 @@ namespace Mending
 
 					float skillPerc = (float) skill.Level / 20f;
 
-					skill.Learn (0.11f);
+					skill.Learn (0.33f);
 
 					CompQuality qualityComponent = objectThing.TryGetComp<CompQuality>();
 					if (qualityComponent != null && qualityComponent.Quality > QualityCategory.Awful) {
@@ -74,8 +73,6 @@ namespace Mending
 						float skillFactor = Mathf.Lerp(1.5f, 0f, skillPerc);
 
 						if (failChance != null && Rand.Value < failChance.Chance(qc) * skillFactor) {
-							compQualityInt.SetValue(qualityComponent, qualityComponent.Quality - 1);
-
 							objectThing.HitPoints -= fixedFailedDamage;
 
 							MoteMaker.ThrowText(actor.DrawPos, actor.Map, "Failed");
