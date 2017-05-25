@@ -2,6 +2,6 @@
   <name>Mending</name>
   <author>notfood</author>
   <url>https://ludeon.com/forums/index.php?topic=22894.0</url>
-  <targetVersion>0.16.0</targetVersion>
-  <description>Repair the durability of items.</description>
+  <targetVersion>0.17.0</targetVersion>
+  <description>Repair the durability of items or just recycle them.</description>
 </ModMetaData>

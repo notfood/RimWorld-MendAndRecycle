@@ -25,7 +25,8 @@
     <workType>Crafting</workType>
     <priorityInType>90</priorityInType>
     <fixedBillGiverDefs>
-      <li>TableRecycle</li>
+      <li>ElectricTailoringBench</li>
+      <li>HandTailoringBench</li>
     </fixedBillGiverDefs>
     <verb>recycle</verb>
     <gerund>recycling</gerund>

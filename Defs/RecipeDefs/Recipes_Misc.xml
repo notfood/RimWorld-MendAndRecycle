@@ -2,6 +2,7 @@
 <RecipeDefs>
 
   <RecipeDef>
+    <workerClass>Mending.Worker</workerClass>
     <defName>MendSimpleApparel</defName>
     <label>mend simple apparel</label>
     <description>Mend simple apparel.</description>
@@ -30,7 +31,6 @@
       <exceptedThingDefs>
         <li>Apparel_VestPlate</li>
         <li>Apparel_PowerArmor</li>
-        <li>Apparel_PersonalShield</li>
       </exceptedThingDefs>
     </fixedIngredientFilter>
     <skillRequirements>
@@ -42,6 +42,7 @@
   </RecipeDef>
   
   <RecipeDef>
+    <workerClass>Mending.Worker</workerClass>
     <defName>MendComplexApparel</defName>
     <label>mend complex apparel</label>
     <description>Mend armor.</description>
@@ -59,7 +60,6 @@
           <thingDefs>
             <li>Apparel_VestPlate</li>
             <li>Apparel_PowerArmor</li>
-            <li>Apparel_PersonalShield</li>
           </thingDefs>
         </filter>
         <count>1</count>
@@ -72,7 +72,6 @@
       <thingDefs>
         <li>Apparel_VestPlate</li>
         <li>Apparel_PowerArmor</li>
-        <li>Apparel_PersonalShield</li>
       </thingDefs>
     </fixedIngredientFilter>
     <skillRequirements>
@@ -84,6 +83,7 @@
   </RecipeDef>
   
   <RecipeDef>
+    <workerClass>Mending.Worker</workerClass>
     <defName>MendSimpleWeapon</defName>
     <label>repair simple weapon</label>
     <description>Repair weapon.</description>
@@ -116,6 +116,7 @@
   </RecipeDef>
   
   <RecipeDef>
+    <workerClass>Mending.Worker</workerClass>
     <defName>MendComplexWeapon</defName>
     <label>repair complex weapon</label>
     <description>Repair weapon.</description>
@@ -176,6 +177,7 @@
   -->
   
   <RecipeDef>
+    <workerClass>Mending.Worker</workerClass>
     <defName>RecycleApparel</defName>
     <label>recycle apparel</label>
     <description>Recycle apparel into their basic components.</description>
@@ -205,6 +207,11 @@
             <minLevel>2</minLevel>
         </li>
     </skillRequirements>
+    <requiredGiverWorkType>Crafting</requiredGiverWorkType>
+    <recipeUsers>
+      <li>ElectricTailoringBench</li>
+      <li>HandTailoringBench</li>
+    </recipeUsers>
   </RecipeDef>
   
 </RecipeDefs>

@@ -6,7 +6,7 @@ using Verse.AI;
 
 namespace Mending
 {
-	public abstract class WorkGiver_Scanner : RimWorld.WorkGiver_Scanner
+	public abstract class WorkGiver_DoBill : RimWorld.WorkGiver_Scanner
 	{
 		private static readonly IntRange ReCheckFailedBillTicksRange = new IntRange (500, 600);
 
@@ -31,7 +31,7 @@ namespace Mending
 			}
 		}
 
-		public WorkGiver_Scanner(JobDef job, bool ignoreHitPoints) {
+		public WorkGiver_DoBill(JobDef job, bool ignoreHitPoints) {
 			if (MissingSkillTranslated == null) {
 				MissingSkillTranslated = "MissingSkill".Translate ();
 			}
@@ -42,14 +42,14 @@ namespace Mending
 			this.ignoreHitPoints = ignoreHitPoints;
 		}
 
-		public override Job JobOnThing (Pawn pawn, Thing thing)
+		public override Job JobOnThing (Pawn pawn, Thing t, bool forced = false)
 		{
-			IBillGiver billGiver = thing as IBillGiver;
+			var billGiver = t as IBillGiver;
 
-			if (billGiver == null || !this.ThingIsUsableBillGiver (thing) || !billGiver.CurrentlyUsable () || !billGiver.BillStack.AnyShouldDoNow || !pawn.CanReserve (thing, 1) || thing.IsBurning () || thing.IsForbidden (pawn)) {
+			if (billGiver == null || !this.ThingIsUsableBillGiver (t) || !billGiver.CurrentlyUsable () || !billGiver.BillStack.AnyShouldDoNow || !pawn.CanReserve (t, 1) || t.IsBurning () || t.IsForbidden (pawn)) {
 				return null;
 			}
-			if (!pawn.CanReach (thing.InteractionCell, PathEndMode.OnCell, Danger.Some, false, TraverseMode.ByPawn)) {
+			if (!pawn.CanReach (t.InteractionCell, PathEndMode.OnCell, Danger.Some, false, TraverseMode.ByPawn)) {
 				return null;
 			}
 			billGiver.BillStack.RemoveIncompletableBills ();
@@ -66,6 +66,11 @@ namespace Mending
 		private Job StartOrResumeBillJob (Pawn pawn, IBillGiver giver) {
 			for (int i = 0; i < giver.BillStack.Count; i++) {
 				Bill bill = giver.BillStack [i];
+
+				// use Mending.Worker as a filter so we can use the same tables.
+				if (bill.recipe.workerClass != typeof(Worker)) {
+					continue;
+				}
 
 				if (Find.TickManager.TicksGame >= bill.lastIngredientSearchFailTicks + ReCheckFailedBillTicksRange.RandomInRange
 				    || FloatMenuMakerMap.making) {
@@ -109,8 +114,7 @@ namespace Mending
 				PathEndMode.Touch,
 				TraverseParms.For (pawn, Danger.Deadly, TraverseMode.ByPawn, false),
 				bill.ingredientSearchRadius,
-				new Predicate<Thing> (baseValidator),
-				null, -1, false);
+				new Predicate<Thing> (baseValidator));
 
 			return chosen != null;
 		}

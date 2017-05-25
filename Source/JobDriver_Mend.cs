@@ -29,7 +29,7 @@ namespace Mending
 
 			Toil toil = new Toil ();
 			toil.initAction = delegate {
-				curJob.bill.Notify_DoBillStarted ();
+				curJob.bill.Notify_DoBillStarted (actor);
 
 				this.failChance = ChanceDef.GetFor(objectThing);
 
@@ -42,6 +42,7 @@ namespace Mending
 
 				workCycleProgress -= StatExtension.GetStatValue (actor, StatDefOf.WorkToMake, true);
 
+				tableThing.UsedThisTick ();
 				if (!tableThing.UsableNow) {
 					actor.jobs.EndCurrentJob (JobCondition.Incompletable);
 				}
@@ -52,19 +53,18 @@ namespace Mending
 						objectThing.HitPoints += (int) Math.Min(remainingHitPoints, fixedHitPointsPerCycle);
 					}
 
-					SkillRecord skill = actor.skills.GetSkill (SkillDefOf.Crafting);
+					float skillPerc = 0.5f;
 
-					if (skill == null) {
-						Log.Error("Mending :: This should never happen! skill == null");
+					SkillDef skillDef = curJob.RecipeDef.workSkill;
+					if (skillDef != null) {
+						SkillRecord skill = actor.skills.GetSkill (skillDef);
 
-						actor.jobs.EndCurrentJob (JobCondition.Incompletable);
+						if (skill != null) {
+							skillPerc = (float)skill.Level / 20f;
 
-						return;
+							skill.Learn (0.11f * curJob.RecipeDef.workSkillLearnFactor);
+						}
 					}
-
-					float skillPerc = (float) skill.Level / 20f;
-
-					skill.Learn (0.33f);
 
 					CompQuality qualityComponent = objectThing.TryGetComp<CompQuality>();
 					if (qualityComponent != null && qualityComponent.Quality > QualityCategory.Awful) {

@@ -21,7 +21,6 @@ namespace Mending
 		protected override Toil DoBill()
 		{
 			Pawn actor = GetActor();
-			SkillRecord skill = actor.skills.GetSkill (SkillDefOf.Crafting);
 			Job curJob = actor.jobs.curJob;
 			Thing objectThing = curJob.GetTarget(objectTI).Thing;
 			CompQuality qualityComponent = objectThing.TryGetComp<CompQuality>();
@@ -30,7 +29,7 @@ namespace Mending
 
 			Toil toil = new Toil ();
 			toil.initAction = delegate {
-				curJob.bill.Notify_DoBillStarted ();
+				curJob.bill.Notify_DoBillStarted (actor);
 
 				this.processedHitPoints = 0;
 				this.failChance = ChanceDef.GetFor(objectThing);
@@ -43,7 +42,8 @@ namespace Mending
 				}
 
 				workCycleProgress -= StatExtension.GetStatValue (actor, StatDefOf.WorkToMake, true);
-				tableThing.Tick();
+
+				tableThing.UsedThisTick ();
 				if (!tableThing.UsableNow) {
 					actor.jobs.EndCurrentJob (JobCondition.Incompletable);
 				}
@@ -57,17 +57,18 @@ namespace Mending
 						processedHitPoints += fixedHitPointsPerCycle/2;
 					}
 
-					if (skill == null) {
-						Log.Error("Mending :: This should never happen! skill == null");
+					float skillPerc = 0.5f;
 
-						actor.jobs.EndCurrentJob (JobCondition.Incompletable);
+					SkillDef skillDef = curJob.RecipeDef.workSkill;
+					if (skillDef != null) {
+						SkillRecord skill = actor.skills.GetSkill (skillDef);
 
-						return;
+						if (skill != null) {
+							skillPerc = (float)skill.Level / 20f;
+
+							skill.Learn (0.11f * curJob.RecipeDef.workSkillLearnFactor);
+						}
 					}
-
-					float skillPerc = (float) skill.Level / 20f;
-
-					skill.Learn (0.33f);
 
 					if (qualityComponent != null && qualityComponent.Quality > QualityCategory.Awful) {
 						QualityCategory qc = qualityComponent.Quality;

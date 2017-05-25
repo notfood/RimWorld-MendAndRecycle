@@ -45,9 +45,10 @@
     <Compile Include="JobDriverUtils.cs" />
     <Compile Include="WorkGiver_Recycle.cs" />
     <Compile Include="LocalJobDefOf.cs" />
-    <Compile Include="WorkGiver_Scanner.cs" />
     <Compile Include="WorkGiver_Mend.cs" />
     <Compile Include="JobDriver_DoBill.cs" />
+    <Compile Include="WorkGiver_DoBill.cs" />
+    <Compile Include="Worker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

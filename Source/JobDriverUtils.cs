@@ -29,11 +29,11 @@ namespace Mending
 				{
 					if (!thingCost.thingDef.intricate)
 					{
-						var mainSmeltProductCount = (float)thingCost.count * efficiency;
+						int mainSmeltProductCount = (int)UnityEngine.Mathf.Floor(thingCost.count * efficiency);
 						if (mainSmeltProductCount > 0)
 						{
 							var resultantSmeltedThing = ThingMaker.MakeThing(thingCost.thingDef, null);
-							resultantSmeltedThing.stackCount = (int)mainSmeltProductCount;
+							resultantSmeltedThing.stackCount = mainSmeltProductCount;
 							list.Add (resultantSmeltedThing);
 						}
 					}
