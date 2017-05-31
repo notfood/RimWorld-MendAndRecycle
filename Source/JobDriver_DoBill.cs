@@ -51,13 +51,13 @@ namespace Mending
 				if (curJob.bill.GetStoreMode () != BillStoreModeDefOf.DropOnFloor) {
 					IntVec3 vec;
 					if (StoreUtility.TryFindBestBetterStoreCellFor (objectThing, actor, actor.Map, StoragePriority.Unstored, actor.Faction, out vec, true)) {
-						actor.carryTracker.TryStartCarry (objectThing, 1);
+						actor.carryTracker.TryStartCarry (objectThing, objectThing.stackCount);
 						curJob.SetTarget(haulTI, vec);
 						curJob.count = 99999;
 						return;
 					}
 				}
-				actor.carryTracker.TryStartCarry (objectThing, 1);
+				actor.carryTracker.TryStartCarry (objectThing, objectThing.stackCount);
 				actor.carryTracker.TryDropCarriedThing(actor.Position, ThingPlaceMode.Near, out objectThing);
 
 				actor.jobs.EndCurrentJob (JobCondition.Succeeded);
