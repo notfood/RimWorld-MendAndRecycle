@@ -100,14 +100,16 @@ namespace Mending
 									Log.Error("Mending :: " + actor + " could not drop recipe product " + list [j] + " near " + actor.Position);
 								}
 							}
-						}
+                        } else if (list.Count == 1) {
+                            list [0].SetPositionDirect (actor.Position);
 
-						list[0].SetPositionDirect (actor.Position);
+                            curJob.bill.Notify_IterationCompleted (actor, list);
+                            curJob.targetB = list [0];
 
-						curJob.bill.Notify_IterationCompleted (actor, list);
-						curJob.targetB = list[0];
-
-						pawn.Map.reservationManager.Reserve(pawn, curJob.targetB, 1);
+                            pawn.Map.reservationManager.Reserve (pawn, curJob.targetB, 1);
+                        } else {
+                            Log.Message ("Mending :: " + actor + " could not reclaim anything from " + objectThing);
+                        }
 
 						ReadyForNextToil();
 					}
