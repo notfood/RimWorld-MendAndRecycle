@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace Mending
+﻿namespace Mending
 {
-	public class WorkGiver_Mend : WorkGiver_DoBill
-	{
-		public WorkGiver_Mend () : base(LocalJobDefOf.Mend, false) {}
-	}
+    public class WorkGiver_Mend : WorkGiver_DoBill
+    {
+        public WorkGiver_Mend () : base (LocalJobDefOf.Mend, false) { }
+    }
 }

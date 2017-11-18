@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-using UnityEngine;
 using RimWorld;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -11,40 +11,38 @@ namespace Mending
 {
 	public class JobDriver_Mend : JobDriver_DoBill
 	{
-		private const int fixedHitPointsPerCycle = 5;
-		private const int fixedFailedDamage = 50;
+		const int fixedHitPointsPerCycle = 5;
+		const int fixedFailedDamage = 50;
 
-		private float workCycle;
-		private float workCycleProgress;
-		private ChanceDef failChance;
+        readonly FieldInfo ApparelWornByCorpseInt = typeof (Apparel).GetField ("wornByCorpseInt", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
-		private FieldInfo ApparelWornByCorpseInt = typeof(Apparel).GetField("wornByCorpseInt", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+		float workCycle;
+		float workCycleProgress;
+		ChanceDef failChance;
 
-		protected override Toil DoBill()
+        protected override Toil DoBill()
 		{
-			Pawn actor = GetActor();
-			Job curJob = actor.jobs.curJob;
-			Thing objectThing = curJob.GetTarget(objectTI).Thing;
-			Building_WorkTable tableThing = curJob.GetTarget(tableTI).Thing as Building_WorkTable;
+			var objectThing = job.GetTarget(objectTI).Thing;
+			var tableThing = job.GetTarget(tableTI).Thing as Building_WorkTable;
 
-			Toil toil = new Toil ();
+			var toil = new Toil ();
 			toil.initAction = delegate {
-				curJob.bill.Notify_DoBillStarted (actor);
+				job.bill.Notify_DoBillStarted (pawn);
 
-				this.failChance = ChanceDef.GetFor(objectThing);
+				failChance = ChanceDef.GetFor(objectThing);
 
-				this.workCycleProgress = this.workCycle = Math.Max(curJob.bill.recipe.workAmount, 10f);
+				workCycleProgress = workCycle = Math.Max(job.bill.recipe.workAmount, 10f);
 			};
 			toil.tickAction = delegate {
 				if (objectThing == null || objectThing.Destroyed) {
-					actor.jobs.EndCurrentJob (JobCondition.Incompletable);
+					pawn.jobs.EndCurrentJob (JobCondition.Incompletable);
 				}
 
-				workCycleProgress -= StatExtension.GetStatValue (actor, StatDefOf.WorkToMake, true);
+				workCycleProgress -= StatExtension.GetStatValue (pawn, StatDefOf.WorkToMake, true);
 
 				tableThing.UsedThisTick ();
 				if (!tableThing.UsableNow) {
-					actor.jobs.EndCurrentJob (JobCondition.Incompletable);
+					pawn.jobs.EndCurrentJob (JobCondition.Incompletable);
 				}
 
 				if (workCycleProgress <= 0) {
@@ -55,31 +53,31 @@ namespace Mending
 
 					float skillPerc = 0.5f;
 
-					SkillDef skillDef = curJob.RecipeDef.workSkill;
+					var skillDef = job.RecipeDef.workSkill;
 					if (skillDef != null) {
-						SkillRecord skill = actor.skills.GetSkill (skillDef);
+						var skill = pawn.skills.GetSkill (skillDef);
 
 						if (skill != null) {
 							skillPerc = (float)skill.Level / 20f;
 
-							skill.Learn (0.11f * curJob.RecipeDef.workSkillLearnFactor);
+							skill.Learn (0.11f * job.RecipeDef.workSkillLearnFactor);
 						}
 					}
 
-					CompQuality qualityComponent = objectThing.TryGetComp<CompQuality>();
+					var qualityComponent = objectThing.TryGetComp<CompQuality>();
 					if (qualityComponent != null && qualityComponent.Quality > QualityCategory.Awful) {
-						QualityCategory qc = qualityComponent.Quality;
+						var qc = qualityComponent.Quality;
 
 						float skillFactor = Mathf.Lerp(1.5f, 0f, skillPerc);
 
 						if (failChance != null && Rand.Value < failChance.Chance(qc) * skillFactor) {
 							objectThing.HitPoints -= fixedFailedDamage;
 
-							MoteMaker.ThrowText(actor.DrawPos, actor.Map, "Failed");
+							MoteMaker.ThrowText(pawn.DrawPos, pawn.Map, "Failed");
 						}
 					}
 
-					actor.GainComfortFromCellIfPossible ();
+					pawn.GainComfortFromCellIfPossible ();
 
 					if (objectThing.HitPoints <= 0) {
 						// recycling whats left...
@@ -87,57 +85,57 @@ namespace Mending
 
 						var list = JobDriverUtils.Reclaim(objectThing, skillFactor * 0.1f);
 
-						pawn.Map.reservationManager.Release(curJob.targetB, pawn);
+						pawn.Map.reservationManager.Release(job.targetB, pawn, job);
 						objectThing.Destroy(DestroyMode.Vanish);
 
 						if (list.Count > 1) {
 							for (int j = 1; j < list.Count; j++) {
-								if (!GenPlace.TryPlaceThing (list [j], actor.Position, actor.Map, ThingPlaceMode.Near, null)) {
-									Log.Error("Mending :: " + actor + " could not drop recipe product " + list [j] + " near " + actor.Position);
+								if (!GenPlace.TryPlaceThing (list [j], pawn.Position, pawn.Map, ThingPlaceMode.Near, null)) {
+									Log.Error("Mending :: " + pawn + " could not drop recipe product " + list [j] + " near " + pawn.Position);
 								}
 							}
 						}
-						list[0].SetPositionDirect (actor.Position);
+						list[0].SetPositionDirect (pawn.Position);
 
-						curJob.targetB = list[0];
-						curJob.bill.Notify_IterationCompleted (actor, list);
+						job.targetB = list[0];
+						job.bill.Notify_IterationCompleted (pawn, list);
 
-						pawn.Map.reservationManager.Reserve(pawn, curJob.targetB, 1);
+						pawn.Map.reservationManager.Reserve(pawn, job, job.targetB, 1);
 
 						ReadyForNextToil();
 
 					} else if (objectThing.HitPoints == objectThing.MaxHitPoints) {
 						// fixed!
 
-						Apparel mendApparel = objectThing as Apparel;
+						var mendApparel = objectThing as Apparel;
 						if (mendApparel != null) {
 							ApparelWornByCorpseInt.SetValue(mendApparel, false);
 						}
 
-						List<Thing> list = new List<Thing> ();
+						var list = new List<Thing> ();
 						list.Add(objectThing);
-						curJob.bill.Notify_IterationCompleted (actor, list);
+						job.bill.Notify_IterationCompleted (pawn, list);
 
 						ReadyForNextToil();
 
 					} else if (objectThing.HitPoints > objectThing.MaxHitPoints) {
 						Log.Error("Mending :: This should never happen! HitPoints > MaxHitPoints");
-						actor.jobs.EndCurrentJob (JobCondition.Incompletable);
+						pawn.jobs.EndCurrentJob (JobCondition.Incompletable);
 					}
 
 					workCycleProgress = workCycle;
 				}
 			};
 			toil.defaultCompleteMode = ToilCompleteMode.Never;
-			toil.WithEffect (() => curJob.bill.recipe.effectWorking, tableTI);
+			toil.WithEffect (() => job.bill.recipe.effectWorking, tableTI);
 			toil.PlaySustainerOrSound (() => toil.actor.CurJob.bill.recipe.soundWorking);
 			toil.WithProgressBar(tableTI, delegate {
 				return (float)objectThing.HitPoints / (float)objectThing.MaxHitPoints;
 			}, false, 0.5f);
 			toil.FailOn(() => {
-				IBillGiver billGiver = curJob.GetTarget (tableTI).Thing as IBillGiver;
+				var billGiver = job.GetTarget (tableTI).Thing as IBillGiver;
 
-				return curJob.bill.suspended || curJob.bill.DeletedOrDereferenced || (billGiver != null && !billGiver.CurrentlyUsable ());
+				return job.bill.suspended || job.bill.DeletedOrDereferenced || (billGiver != null && !billGiver.CurrentlyUsableForBills ());
 			});
 			return toil;
 		}

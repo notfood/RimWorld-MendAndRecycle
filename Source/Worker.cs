@@ -1,12 +1,10 @@
-﻿using System;
-
-using Verse;
+﻿using Verse;
 
 namespace Mending
 {
-	public class Worker : RecipeWorker
-	{
-		// this is a dummy
-	}
+    public class Worker : RecipeWorker
+    {
+        // this is a dummy
+    }
 }
 

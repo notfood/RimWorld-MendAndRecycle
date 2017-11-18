@@ -1,134 +1,131 @@
 ﻿using System;
-using System.Collections.Generic;
 
+using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.AI;
-using RimWorld;
 
 namespace Mending
 {
-	public class JobDriver_Recycle : JobDriver_DoBill
-	{
-		private const int fixedHitPointsPerCycle = 5;
-		private const int fixedFailedDamage = 50;
+    public class JobDriver_Recycle : JobDriver_DoBill
+    {
+        const int fixedHitPointsPerCycle = 5;
+        const int fixedFailedDamage = 50;
 
-		private int processedHitPoints;
-		private float workCycle;
-		private float workCycleProgress;
-		private ChanceDef failChance;
+        int processedHitPoints;
+        float workCycle;
+        float workCycleProgress;
+        ChanceDef failChance;
 
-		protected override Toil DoBill()
-		{
-			Pawn actor = GetActor();
-			Job curJob = actor.jobs.curJob;
-			Thing objectThing = curJob.GetTarget(objectTI).Thing;
-			CompQuality qualityComponent = objectThing.TryGetComp<CompQuality>();
-			Building_WorkTable tableThing = curJob.GetTarget(tableTI).Thing as Building_WorkTable;
-			CompPowerTrader tablePowerTraderComp = tableThing.GetComp<CompPowerTrader>();
+        protected override Toil DoBill ()
+        {
+            var objectThing = job.GetTarget (objectTI).Thing;
+            var qualityComponent = objectThing.TryGetComp<CompQuality> ();
+            var tableThing = job.GetTarget (tableTI).Thing as Building_WorkTable;
+            var tablePowerTraderComp = tableThing.GetComp<CompPowerTrader> ();
 
-			Toil toil = new Toil ();
-			toil.initAction = delegate {
-				curJob.bill.Notify_DoBillStarted (actor);
+            var toil = new Toil ();
+            toil.initAction = delegate {
+                job.bill.Notify_DoBillStarted (pawn);
 
-				this.processedHitPoints = 0;
-				this.failChance = ChanceDef.GetFor(objectThing);
+                processedHitPoints = 0;
+                failChance = ChanceDef.GetFor (objectThing);
 
-				this.workCycleProgress = this.workCycle = Math.Max(curJob.bill.recipe.workAmount, 10f);
-			};
-			toil.tickAction = delegate {
-				if (objectThing == null || objectThing.Destroyed) {
-					actor.jobs.EndCurrentJob (JobCondition.Incompletable);
-				}
+                workCycleProgress = workCycle = Math.Max (job.bill.recipe.workAmount, 10f);
+            };
+            toil.tickAction = delegate {
+                if (objectThing == null || objectThing.Destroyed) {
+                    pawn.jobs.EndCurrentJob (JobCondition.Incompletable);
+                }
 
-				workCycleProgress -= StatExtension.GetStatValue (actor, StatDefOf.WorkToMake, true);
+                workCycleProgress -= StatExtension.GetStatValue (pawn, StatDefOf.WorkToMake, true);
 
-				tableThing.UsedThisTick ();
-				if (!tableThing.UsableNow) {
-					actor.jobs.EndCurrentJob (JobCondition.Incompletable);
-				}
+                tableThing.UsedThisTick ();
+                if (!tableThing.UsableNow) {
+                    pawn.jobs.EndCurrentJob (JobCondition.Incompletable);
+                }
 
-				if (workCycleProgress <= 0) {
-					objectThing.HitPoints -= fixedHitPointsPerCycle;
+                if (workCycleProgress <= 0) {
+                    objectThing.HitPoints -= fixedHitPointsPerCycle;
 
-					if (tablePowerTraderComp != null && tablePowerTraderComp.PowerOn) {
-						processedHitPoints += fixedHitPointsPerCycle;
-					} else {
-						processedHitPoints += fixedHitPointsPerCycle/2;
-					}
+                    if (tablePowerTraderComp != null && tablePowerTraderComp.PowerOn) {
+                        processedHitPoints += fixedHitPointsPerCycle;
+                    } else {
+                        processedHitPoints += fixedHitPointsPerCycle / 2;
+                    }
 
-					float skillPerc = 0.5f;
+                    float skillPerc = 0.5f;
 
-					SkillDef skillDef = curJob.RecipeDef.workSkill;
-					if (skillDef != null) {
-						SkillRecord skill = actor.skills.GetSkill (skillDef);
+                    var skillDef = job.RecipeDef.workSkill;
+                    if (skillDef != null) {
+                        var skill = pawn.skills.GetSkill (skillDef);
 
-						if (skill != null) {
-							skillPerc = (float)skill.Level / 20f;
+                        if (skill != null) {
+                            skillPerc = (float)skill.Level / 20f;
 
-							skill.Learn (0.11f * curJob.RecipeDef.workSkillLearnFactor);
-						}
-					}
+                            skill.Learn (0.11f * job.RecipeDef.workSkillLearnFactor);
+                        }
+                    }
 
-					if (qualityComponent != null && qualityComponent.Quality > QualityCategory.Awful) {
-						QualityCategory qc = qualityComponent.Quality;
+                    if (qualityComponent != null && qualityComponent.Quality > QualityCategory.Awful) {
+                        var qc = qualityComponent.Quality;
 
-						float skillFactor = Mathf.Lerp(0.5f, 1.5f, skillPerc);
+                        float skillFactor = Mathf.Lerp (0.5f, 1.5f, skillPerc);
 
-						if (failChance != null && Rand.Value < failChance.Chance(qc) * skillFactor) {
-							objectThing.HitPoints -= fixedFailedDamage;
+                        if (failChance != null && Rand.Value < failChance.Chance (qc) * skillFactor) {
+                            objectThing.HitPoints -= fixedFailedDamage;
 
-							MoteMaker.ThrowText(actor.DrawPos, actor.Map, "Failed");
-						}
-					}
+                            MoteMaker.ThrowText (pawn.DrawPos, pawn.Map, "Failed");
+                        }
+                    }
 
-					actor.GainComfortFromCellIfPossible ();
+                    pawn.GainComfortFromCellIfPossible ();
 
-					if (objectThing.HitPoints <= 0) {
-						pawn.Map.reservationManager.Release(curJob.targetB, pawn);
-						objectThing.Destroy(DestroyMode.Vanish);
+                    if (objectThing.HitPoints <= 0) {
+                        pawn.Map.reservationManager.Release (job.targetB, pawn, job);
+                        objectThing.Destroy (DestroyMode.Vanish);
 
-						float skillFactor = Mathf.Lerp(0.5f, 1.5f, skillPerc);
-						float healthPerc = (float) processedHitPoints / (float) objectThing.MaxHitPoints;
-						float healthFactor = Mathf.Lerp(0f, 0.4f, healthPerc);
+                        float skillFactor = Mathf.Lerp (0.5f, 1.5f, skillPerc);
+                        float healthPerc = (float)processedHitPoints / (float)objectThing.MaxHitPoints;
+                        float healthFactor = Mathf.Lerp (0f, 0.4f, healthPerc);
 
-						var list = JobDriverUtils.Reclaim(objectThing, skillFactor * healthFactor);
+                        var list = JobDriverUtils.Reclaim (objectThing, skillFactor * healthFactor);
 
-						if (list.Count > 1) {
-							for (int j = 1; j < list.Count; j++) {
-								if (!GenPlace.TryPlaceThing (list [j], actor.Position, actor.Map, ThingPlaceMode.Near, null)) {
-									Log.Error("Mending :: " + actor + " could not drop recipe product " + list [j] + " near " + actor.Position);
-								}
-							}
+                        if (list.Count > 1) {
+                            for (int j = 1; j < list.Count; j++) {
+                                if (!GenPlace.TryPlaceThing (list [j], pawn.Position, pawn.Map, ThingPlaceMode.Near, null)) {
+                                    Log.Error ("Mending :: " + pawn + " could not drop recipe product " + list [j] + " near " + pawn.Position);
+                                }
+                            }
                         } else if (list.Count == 1) {
-                            list [0].SetPositionDirect (actor.Position);
+                            list [0].SetPositionDirect (pawn.Position);
 
-                            curJob.bill.Notify_IterationCompleted (actor, list);
-                            curJob.targetB = list [0];
+                            job.bill.Notify_IterationCompleted (pawn, list);
+                            job.targetB = list [0];
 
-                            pawn.Map.reservationManager.Reserve (pawn, curJob.targetB, 1);
+                            pawn.Map.reservationManager.Reserve (pawn, job, job.targetB, 1);
                         } else {
-                            Log.Message ("Mending :: " + actor + " could not reclaim anything from " + objectThing);
+                            Log.Message ("Mending :: " + pawn + " could not reclaim anything from " + objectThing);
                         }
 
-						ReadyForNextToil();
-					}
+                        ReadyForNextToil ();
+                    }
 
-					workCycleProgress = workCycle;
-				}
-			};
-			toil.defaultCompleteMode = ToilCompleteMode.Never;
-			toil.WithEffect (() => curJob.bill.recipe.effectWorking, tableTI);
-			toil.PlaySustainerOrSound (() => toil.actor.CurJob.bill.recipe.soundWorking);
-			toil.WithProgressBar(tableTI, delegate {
-				return (float)objectThing.HitPoints / (float)objectThing.MaxHitPoints;
-			}, false, 0.5f);
-			toil.FailOn (() => {
-				return toil.actor.CurJob.bill.suspended || !tableThing.UsableNow;
-			});
-			return toil;
-		}
+                    workCycleProgress = workCycle;
+                }
+            };
+            toil.defaultCompleteMode = ToilCompleteMode.Never;
+            toil.WithEffect (() => job.bill.recipe.effectWorking, tableTI);
+            toil.PlaySustainerOrSound (() => toil.actor.CurJob.bill.recipe.soundWorking);
+            toil.WithProgressBar (tableTI, delegate {
+                return (float)objectThing.HitPoints / (float)objectThing.MaxHitPoints;
+            }, false, 0.5f);
+            toil.FailOn (() => {
+                return toil.actor.CurJob.bill.suspended || !tableThing.UsableNow;
+            });
+            return toil;
+        }
 
-	}
+    }
 }
 

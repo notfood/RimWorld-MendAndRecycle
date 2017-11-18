@@ -19,10 +19,10 @@
     </ThingDef>
 
   <ThingDef ParentName="BenchBase">
-    <DefName>TableMending</DefName>
+    <defName>TableMending</defName>
     <label>mending workbench</label>
-    <ThingClass>Building_WorkTable</ThingClass>
-    <Description>A workbench equipped with all the tools required to mend and repair damaged items. Requires power and consumes mending kits. Mending kits can be made in the electric tailoring workbench</Description>
+    <thingClass>Building_WorkTable</thingClass>
+    <description>A workbench equipped with all the tools required to mend and repair damaged items. Requires power and consumes mending kits. Mending kits can be made in the electric tailoring workbench</description>
     <graphicData>
       <texPath>Things/Buildings/TableMending</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -34,16 +34,16 @@
         <cornerBR>Damage/Corner</cornerBR>
       </damageData>
     </graphicData>
-    <CostList>
+    <costList>
       <Steel>50</Steel>
       <Component>3</Component>
-    </CostList>
+    </costList>
     <stuffCategories>
       <li>Metallic</li>
       <li>Woody</li>
     </stuffCategories>
     <costStuffCount>75</costStuffCount>
-    <AltitudeLayer>Building</AltitudeLayer>
+    <altitudeLayer>Building</altitudeLayer>
     <fillPercent>0.5</fillPercent>
     <useHitPoints>True</useHitPoints>
     <statBases>
@@ -52,9 +52,9 @@
       <Flammability>1.0</Flammability>
       <Cleanliness>-5</Cleanliness>
     </statBases>
-    <Size>(3,1)</Size>
-    <DesignationCategory>Production</DesignationCategory>
-    <Passability>PassThroughOnly</Passability>
+    <size>(3,1)</size>
+    <designationCategory>Production</designationCategory>
+    <passability>PassThroughOnly</passability>
     <pathCost>70</pathCost>
     <hasInteractionCell>True</hasInteractionCell>
     <interactionCellOffset>(0,0,-1)</interactionCellOffset>

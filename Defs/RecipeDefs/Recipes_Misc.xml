@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<RecipeDefs>
+<Defs>
 
   <RecipeDef>
     <workerClass>Mending.Worker</workerClass>
@@ -34,10 +34,7 @@
       </exceptedThingDefs>
     </fixedIngredientFilter>
     <skillRequirements>
-        <li>
-            <skill>Crafting</skill>
-            <minLevel>4</minLevel>
-        </li>
+      <Crafting>4</Crafting>
     </skillRequirements>
   </RecipeDef>
   
@@ -75,10 +72,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <skillRequirements>
-        <li>
-            <skill>Crafting</skill>
-            <minLevel>8</minLevel>
-        </li>
+      <Crafting>8</Crafting>
     </skillRequirements>
   </RecipeDef>
   
@@ -108,10 +102,7 @@
       </categories>
     </fixedIngredientFilter>
     <skillRequirements>
-        <li>
-            <skill>Crafting</skill>
-            <minLevel>4</minLevel>
-        </li>
+      <Crafting>4</Crafting>
     </skillRequirements>
   </RecipeDef>
   
@@ -141,10 +132,7 @@
       </categories>
     </fixedIngredientFilter>
     <skillRequirements>
-        <li>
-            <skill>Crafting</skill>
-            <minLevel>8</minLevel>
-        </li>
+      <Crafting>8</Crafting>
     </skillRequirements>
   </RecipeDef>
   
@@ -202,10 +190,7 @@
       </categories>
     </fixedIngredientFilter>
     <skillRequirements>
-        <li>
-            <skill>Crafting</skill>
-            <minLevel>2</minLevel>
-        </li>
+      <Crafting>2</Crafting>
     </skillRequirements>
     <requiredGiverWorkType>Crafting</requiredGiverWorkType>
     <recipeUsers>
@@ -214,4 +199,4 @@
     </recipeUsers>
   </RecipeDef>
   
-</RecipeDefs>
+</Defs>
