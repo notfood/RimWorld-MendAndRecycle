@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LanguageData>
+
+ 	<TableMending.label>수선 작업대</TableMending.label>
+ 	<TableMending.description>손상된 아이템을 수리하기 위한 모든 도구를 갖춘 작업대입니다. 전력을 요구하고 수리용품을 소모합니다. 수리용품은 자동 재봉 작업대에서 만들 수 있습니다.</TableMending.description>
+
+    <MendingKit.label>수리용품</MendingKit.label>
+    <MendingKit.description>잡다한 옷가지, 조각, 부품들입니다. 무기를 수리하고 의류를 수선하는데 필수품입니다.</MendingKit.description>
+
+</LanguageData>
