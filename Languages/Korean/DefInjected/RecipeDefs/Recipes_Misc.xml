@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<LanguageData>
+
+  <MendSimpleApparel.label>간단한 의류 수선</MendSimpleApparel.label>
+  <MendSimpleApparel.description>간단한 의류를 수선합니다.</MendSimpleApparel.description>
+  <MendSimpleApparel.jobString>수선하는 중.</MendSimpleApparel.jobString>
+
+  <MendComplexApparel.label>복잡한 의류 수선</MendComplexApparel.label>
+  <MendComplexApparel.description>갑옷을 수선합니다.</MendComplexApparel.description>
+  <MendComplexApparel.jobString>수선하는 중.</MendComplexApparel.jobString>
+
+  <MendSimpleWeapon.label>간단한 무기 수리</MendSimpleWeapon.label>
+  <MendSimpleWeapon.description>무기를 수리합니다.</MendSimpleWeapon.description>
+  <MendSimpleWeapon.jobString>수리하는 중.</MendSimpleWeapon.jobString>
+
+  <MendComplexWeapon.label>복잡한 무기 수리</MendComplexWeapon.label>
+  <MendComplexWeapon.description>무기를 수리합니다.</MendComplexWeapon.description>
+  <MendComplexWeapon.jobString>수리하는 중.</MendComplexWeapon.jobString>
+
+  <RecycleApparel.label>의류 재활용</RecycleApparel.label>
+  <RecycleApparel.description>의류를 기본 구성품으로 재활용합니다.</RecycleApparel.description>
+  <RecycleApparel.jobString>재활용하는 중.</RecycleApparel.jobString>
+  
+  <MakeMendingKit.label>수리용품 만들기</MakeMendingKit.label>
+  <MakeMendingKit.description>재료로부터 수리용품을 제작합니다. 수선대에 다시 채우기 충분할 만큼 생산하세요.</MakeMendingKit.description>
+  <MakeMendingKit.jobString>수리용품 제작하는 중.</MakeMendingKit.jobString>
+  
+</LanguageData>
