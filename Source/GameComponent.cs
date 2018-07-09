@@ -73,8 +73,8 @@ namespace Mending
         private static void AddDefToFilters(RecipeDef recDef, HashSet<ThingDef> defs)
         {
             FieldInfo allowedThingDefsFI = typeof(ThingFilter).GetField("allowedDefs", BindingFlags.NonPublic | BindingFlags.Instance);
-            allowedThingDefsFI.SetValue(recDef.defaultIngredientFilter, new HashSet<ThingDef>(defs));
             allowedThingDefsFI.SetValue(recDef.fixedIngredientFilter, new HashSet<ThingDef>(defs));
+            allowedThingDefsFI.SetValue(recDef.defaultIngredientFilter, new HashSet<ThingDef>(defs));
         }
     }
 }
