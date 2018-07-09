@@ -55,6 +55,12 @@ namespace Mending
             DEFAULT_POST_INDUSTRIAL_FAIL_CHANCE[(int)QualityCategory.Excellent] = 1;
             DEFAULT_POST_INDUSTRIAL_FAIL_CHANCE[(int)QualityCategory.Masterwork] = 0;
             DEFAULT_POST_INDUSTRIAL_FAIL_CHANCE[(int)QualityCategory.Legendary] = 0;
+
+            for (int i = 0; i < qualities.Length; ++i)
+            {
+                TechLevelRangeUtil.PreIndustrial.FailChanceByQuality[i] = DEFAULT_PRE_INDUSTRIAL_FAIL_CHANCE[i];
+                TechLevelRangeUtil.PostIndustrial.FailChanceByQuality[i] = DEFAULT_POST_INDUSTRIAL_FAIL_CHANCE[i];
+            }
         }
 
 
@@ -64,6 +70,19 @@ namespace Mending
 
             Scribe_Deep.Look(ref TechLevelRangeUtil.PreIndustrial, "mending.PreIndustrial");
             Scribe_Deep.Look(ref TechLevelRangeUtil.PostIndustrial, "mending.PostIndustrial");
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                var qualities = Enum.GetValues(typeof(QualityCategory));
+                for (int i = 0; i < qualities.Length; ++i)
+                {
+                    if (TechLevelRangeUtil.PreIndustrial.FailChanceByQuality[i] == -1)
+                        TechLevelRangeUtil.PreIndustrial.FailChanceByQuality[i] = DEFAULT_PRE_INDUSTRIAL_FAIL_CHANCE[i];
+
+                    if (TechLevelRangeUtil.PostIndustrial.FailChanceByQuality[i] == -1)
+                        TechLevelRangeUtil.PostIndustrial.FailChanceByQuality[i] = DEFAULT_POST_INDUSTRIAL_FAIL_CHANCE[i];
+                }
+            }
         }
 
         public static void DoSettingsWindowContents(Rect rect)
@@ -83,6 +102,7 @@ namespace Mending
             l.Label("mending.PostIndustrial".Translate());
             l.Gap(4);
             DrawFailChances(l, TechLevelRangeUtil.PostIndustrial, DEFAULT_POST_INDUSTRIAL_FAIL_CHANCE);
+            l.End();
         }
 
         private static void DrawFailChances(Listing_Standard l, TechLevelRange techLevel, int[] defaults)
@@ -93,6 +113,7 @@ namespace Mending
                 int failChance = techLevel.FailChanceByQuality[i];
                 string buffer = failChance.ToString();
                 NumberInput(l, ((QualityCategory)i).ToString(), ref failChance, ref buffer, 0, 100);
+                techLevel.FailChanceByQuality[i] = failChance;
             }
             if (l.ButtonText("ResetButton".Translate()))
             {
@@ -107,7 +128,7 @@ namespace Mending
         {
             try
             {
-                l.TextFieldNumericLabeled<int>(label.Translate(), ref val, ref buffer, min, max);
+                l.TextFieldNumericLabeled<int>(label, ref val, ref buffer, min, max);
             }
             catch
             {

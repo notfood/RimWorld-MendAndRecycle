@@ -35,7 +35,7 @@ namespace Mending
             for (int i = 0; i < qualities.Length; ++i)
             {
                 int failChance = this.failChance[i];
-                Scribe_Values.Look<int>(ref failChance, qualities.GetValue(i).ToString());
+                Scribe_Values.Look<int>(ref failChance, qualities.GetValue(i).ToString(), -1);
                 this.failChance[i] = failChance;
             }
         }
@@ -57,7 +57,7 @@ namespace Mending
 
         private static bool SuccessOnAction(FailChanceByQuality failChanceByQuality, float skillFactor, Thing t)
         {
-            Log.Error("Begin SuccessChanceUtil.SuccessOnAction");
+            //Log.Error("Begin SuccessChanceUtil.SuccessOnAction");
             QualityCategory qc;
             if (t.TryGetQuality(out qc))
             {
@@ -65,11 +65,11 @@ namespace Mending
                 float baseFc = failChanceByQuality[qc];
                 float fc = baseFc * skillFactor;
                 bool result = r >= fc;
-                Log.Warning("r: " + r + " baseFc: " + baseFc + " fc: " + fc + " result: " + result);
-                Log.Error("End SuccessChanceUtil.SuccessOnAction - Result: " + result);
+                //Log.Warning("r: " + r + " baseFc: " + baseFc + " fc: " + fc + " result: " + result);
+                //Log.Error("End SuccessChanceUtil.SuccessOnAction - Result: " + result);
                 return result;
             }
-            Log.Error("End SuccessChanceUtil.SuccessOnAction - true");
+            //Log.Error("End SuccessChanceUtil.SuccessOnAction - true");
             return true;
         }
     }
