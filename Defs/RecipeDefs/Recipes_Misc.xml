@@ -13,25 +13,10 @@
     <soundWorking>Recipe_Tailor</soundWorking>
     <ingredients>
       <li>
-        <filter>
-          <categories>
-            <li>Apparel</li>
-          </categories>
-        </filter>
         <count>1</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
-      <categories>
-        <li>Apparel</li>
-      </categories>
-      <exceptedCategories>
-        <li>Headgear</li>
-      </exceptedCategories>
-      <exceptedThingDefs>
-        <li>Apparel_VestPlate</li>
-        <li>Apparel_PowerArmor</li>
-      </exceptedThingDefs>
     </fixedIngredientFilter>
     <skillRequirements>
       <Crafting>4</Crafting>
@@ -50,26 +35,10 @@
     <soundWorking>Recipe_Smith</soundWorking>
     <ingredients>
       <li>
-        <filter>
-          <categories>
-            <li>Headgear</li>
-          </categories>
-          <thingDefs>
-            <li>Apparel_VestPlate</li>
-            <li>Apparel_PowerArmor</li>
-          </thingDefs>
-        </filter>
         <count>1</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
-      <categories>
-        <li>Headgear</li>
-      </categories>
-      <thingDefs>
-        <li>Apparel_VestPlate</li>
-        <li>Apparel_PowerArmor</li>
-      </thingDefs>
     </fixedIngredientFilter>
     <skillRequirements>
       <Crafting>8</Crafting>

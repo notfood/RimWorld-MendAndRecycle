@@ -36,6 +36,7 @@
       <MaxHitPoints>100</MaxHitPoints>
       <MarketValue>10</MarketValue>
       <Flammability>1.0</Flammability>
+      <Mass>5</Mass>
     </statBases>
     <intricate>true</intricate>
     <thingCategories>

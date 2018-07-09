@@ -17,18 +17,17 @@ namespace Mending
 
         bool ignoreHitPoints;
 
-        public override PathEndMode PathEndMode {
-            get {
-                return PathEndMode.Touch;
-            }
-        }
+        public override PathEndMode PathEndMode { get { return PathEndMode.Touch; } }
 
-        public override ThingRequest PotentialWorkThingRequest {
-            get {
-                if (def.fixedBillGiverDefs != null && def.fixedBillGiverDefs.Count == 1) {
-                    return ThingRequest.ForDef (def.fixedBillGiverDefs [0]);
+        public override ThingRequest PotentialWorkThingRequest
+        {
+            get
+            {
+                if (def.fixedBillGiverDefs != null && def.fixedBillGiverDefs.Count == 1)
+                {
+                    return ThingRequest.ForDef(def.fixedBillGiverDefs[0]);
                 }
-                return ThingRequest.ForGroup (ThingRequestGroup.PotentialBillGiver);
+                return ThingRequest.ForGroup(ThingRequestGroup.PotentialBillGiver);
             }
         }
 

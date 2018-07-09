@@ -36,7 +36,7 @@
     </graphicData>
     <costList>
       <Steel>50</Steel>
-      <Component>3</Component>
+      <ComponentIndustrial>3</ComponentIndustrial>
     </costList>
     <stuffCategories>
       <li>Metallic</li>
@@ -75,7 +75,6 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <startElectricalFires>true</startElectricalFires>
         <basePowerConsumption>200</basePowerConsumption>
       </li>
       <li Class="CompProperties_Refuelable">

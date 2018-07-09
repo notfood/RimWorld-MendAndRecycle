@@ -15,7 +15,6 @@ namespace Mending
         int processedHitPoints;
         float workCycle;
         float workCycleProgress;
-        ChanceDef failChance;
 
         protected override Toil DoBill ()
         {
@@ -29,7 +28,6 @@ namespace Mending
                 job.bill.Notify_DoBillStarted (pawn);
 
                 processedHitPoints = 0;
-                failChance = ChanceDef.GetFor (objectThing);
 
                 workCycleProgress = workCycle = Math.Max (job.bill.recipe.workAmount, 10f);
             };
@@ -41,7 +39,7 @@ namespace Mending
                 workCycleProgress -= StatExtension.GetStatValue (pawn, StatDefOf.WorkToMake, true);
 
                 tableThing.UsedThisTick ();
-                if (!tableThing.UsableNow) {
+                if (!tableThing.CurrentlyUsableForBills()) {
                     pawn.jobs.EndCurrentJob (JobCondition.Incompletable);
                 }
 
@@ -72,7 +70,7 @@ namespace Mending
 
                         float skillFactor = Mathf.Lerp (0.5f, 1.5f, skillPerc);
 
-                        if (failChance != null && Rand.Value < failChance.Chance (qc) * skillFactor) {
+                        if (!SuccessChanceUtil.SuccessOnAction(pawn, skillFactor, objectThing)) {
                             objectThing.HitPoints -= fixedFailedDamage;
 
                             MoteMaker.ThrowText (pawn.DrawPos, pawn.Map, "Failed");
@@ -121,7 +119,7 @@ namespace Mending
                 return (float)objectThing.HitPoints / (float)objectThing.MaxHitPoints;
             }, false, 0.5f);
             toil.FailOn (() => {
-                return toil.actor.CurJob.bill.suspended || !tableThing.UsableNow;
+                return toil.actor.CurJob.bill.suspended || !tableThing.CurrentlyUsableForBills();
             });
             return toil;
         }

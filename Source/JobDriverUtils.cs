@@ -9,9 +9,9 @@ namespace Mending
     {
         public static List<Thing> Reclaim (Thing thing, float efficiency)
         {
-            var costListAdj = thing.CostListAdjusted ();
+            List<ThingDefCountClass> costListAdj = thing.CostListAdjusted ();
 
-            List<ThingCountClass> thingCountList;
+            List<ThingDefCountClass> thingCountList;
 
             if (!costListAdj.NullOrEmpty ()) {
                 thingCountList = costListAdj;
