@@ -13,6 +13,11 @@
     <soundWorking>Recipe_Tailor</soundWorking>
     <ingredients>
       <li>
+        <filter>
+          <categories>
+            <li>Apparel</li>
+          </categories>
+        </filter>
         <count>1</count>
       </li>
     </ingredients>
@@ -35,6 +40,11 @@
     <soundWorking>Recipe_Smith</soundWorking>
     <ingredients>
       <li>
+        <filter>
+          <categories>
+            <li>Apparel</li>
+          </categories>
+        </filter>
         <count>1</count>
       </li>
     </ingredients>
