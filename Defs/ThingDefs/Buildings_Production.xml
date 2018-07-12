@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-    
-    <ThingDef Name="BenchBase" ParentName="BuildingBase" Abstract="True">
-    <castEdgeShadows>true</castEdgeShadows>
-    <staticSunShadowHeight>0.20</staticSunShadowHeight>
-        <building>
-            <workSpeedPenaltyOutdoors>true</workSpeedPenaltyOutdoors>
-            <workSpeedPenaltyTemperature>true</workSpeedPenaltyTemperature>
-        </building>
-        <comps>
-            <li>
-                <compClass>CompReportWorkSpeed</compClass>
-            </li>
-        </comps>
-        <placeWorkers>
-            <li>PlaceWorker_ReportWorkSpeedPenalties</li>
-        </placeWorkers>
-    </ThingDef>
 
   <ThingDef ParentName="BenchBase">
     <defName>TableMending</defName>
@@ -25,8 +8,8 @@
     <description>A workbench equipped with all the tools required to mend and repair damaged items. Requires power and consumes mending kits. Mending kits can be made in the electric tailoring workbench</description>
     <graphicData>
       <texPath>Things/Buildings/TableMending</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(3,1)</drawSize>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3.3375,1.5)</drawSize>
       <damageData>
         <cornerTL>Damage/Corner</cornerTL>
         <cornerTR>Damage/Corner</cornerTR>
@@ -34,6 +17,8 @@
         <cornerBR>Damage/Corner</cornerBR>
       </damageData>
     </graphicData>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.20</staticSunShadowHeight>
     <costList>
       <Steel>50</Steel>
       <ComponentIndustrial>3</ComponentIndustrial>
