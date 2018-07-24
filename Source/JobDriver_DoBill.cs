@@ -69,7 +69,7 @@ namespace Mending
             return base.GetReport ();
         }
 
-        public override bool TryMakePreToilReservations ()
+        public override bool TryMakePreToilReservations (bool errorOnFailed)
         {
             pawn.ReserveAsManyAsPossible (job.GetTargetQueue (TargetIndex.B), job, 1);
             return pawn.Reserve (job.GetTarget (TargetIndex.A), job, 1);

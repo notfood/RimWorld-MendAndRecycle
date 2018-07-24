@@ -19,6 +19,11 @@ namespace Mending
 		float workCycle;
 		float workCycleProgress;
 
+        public override bool TryMakePreToilReservations(bool errorOnFailed)
+        {
+            return true;
+        }
+
         protected override Toil DoBill()
 		{
 			var objectThing = job.GetTarget(objectTI).Thing;
