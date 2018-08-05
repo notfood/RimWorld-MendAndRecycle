@@ -9,7 +9,7 @@
     <graphicData>
       <texPath>Things/Buildings/TableMending</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(3.3375,1.5)</drawSize>
+      <drawSize>(3,1)</drawSize>
       <damageData>
         <cornerTL>Damage/Corner</cornerTL>
         <cornerTR>Damage/Corner</cornerTR>
