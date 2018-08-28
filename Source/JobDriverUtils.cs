@@ -3,7 +3,7 @@
 using Verse;
 using RimWorld;
 
-namespace Mending
+namespace MendAndRecycle
 {
     static class JobDriverUtils
     {

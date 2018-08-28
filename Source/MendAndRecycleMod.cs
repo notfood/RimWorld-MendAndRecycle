@@ -5,13 +5,13 @@ using System.Reflection;
 using RimWorld;
 using Verse;
 
-namespace Mending
+namespace MendAndRecycle
 {
-    class MendingMod : Mod
+    class MendAndRecycleMod : Mod
     {
         static readonly FieldInfo thingFilterallowedDefsField = typeof(ThingFilter).GetField("allowedDefs", BindingFlags.NonPublic | BindingFlags.Instance);
         
-        public MendingMod(ModContentPack mcp) : base(mcp)
+        public MendAndRecycleMod(ModContentPack mcp) : base(mcp)
         {
             base.GetSettings<Settings>();
 
@@ -20,7 +20,7 @@ namespace Mending
 
         public override string SettingsCategory()
         {
-            return ResourceBank.Mending;
+            return ResourceBank.MendAndRecycle;
         }
 
         public override void DoSettingsWindowContents(UnityEngine.Rect inRect)

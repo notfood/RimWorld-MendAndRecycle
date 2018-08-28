@@ -4,7 +4,7 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace Mending
+namespace MendAndRecycle
 {
     public abstract class WorkGiver_DoBill : RimWorld.WorkGiver_Scanner
     {
@@ -61,7 +61,7 @@ namespace Mending
             for (int i = 0; i < giver.BillStack.Count; i++) {
                 Bill bill = giver.BillStack [i];
 
-                // use Mending.Worker as a filter so we can use the same tables.
+                // use MendAndRecycle.Worker as a filter so we can use the same tables.
                 if (bill.recipe.workerClass != typeof (Worker)) {
                     continue;
                 }
@@ -123,7 +123,7 @@ namespace Mending
             if (building.def.hasInteractionCell) {
                 return building.InteractionCell;
             }
-            Log.Error ("Mending :: Tried to find bill ingredients for " + billGiver + " which has no interaction cell.");
+            Log.Error ("MendAndRecycle :: Tried to find bill ingredients for " + billGiver + " which has no interaction cell.");
             return forPawn.Position;
         }
 

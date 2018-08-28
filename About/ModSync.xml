@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModSyncNinjaData>
   <ID>09123b8a-49a2-42cd-8893-50f21ddfb8b2</ID>
-  <ModName>[0.19] Mending</ModName>
+  <ModName>MendAndRecycle</ModName>
   <Version>0.19.0.1</Version>
   <SaveBreaking>False</SaveBreaking>
   <Host name="Github">
     <Owner>notfood</Owner>
-    <Project>RimWorld-Mending</Project>
+    <Project>RimWorld-MendAndRecycle</Project>
     <AboutDir>About</AboutDir>
     <DownloadFrom>ModSyncReleases</DownloadFrom>
     <Branch>master</Branch>

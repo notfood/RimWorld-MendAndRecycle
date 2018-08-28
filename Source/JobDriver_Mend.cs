@@ -7,7 +7,7 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 
-namespace Mending
+namespace MendAndRecycle
 {
     public class JobDriver_Mend : JobDriver_DoBill
 	{
@@ -93,7 +93,7 @@ namespace Mending
 						if (list.Count > 1) {
 							for (int j = 1; j < list.Count; j++) {
 								if (!GenPlace.TryPlaceThing (list [j], pawn.Position, pawn.Map, ThingPlaceMode.Near, null)) {
-									Log.Error("Mending :: " + pawn + " could not drop recipe product " + list [j] + " near " + pawn.Position);
+									Log.Error("MendAndRecycle :: " + pawn + " could not drop recipe product " + list [j] + " near " + pawn.Position);
 								}
 							}
 						}
@@ -121,7 +121,7 @@ namespace Mending
 						ReadyForNextToil();
 
                     } else if (objectThing.HitPoints > objectThing.MaxHitPoints) {
-						Log.Error("Mending :: This should never happen! HitPoints > MaxHitPoints");
+						Log.Error("MendAndRecycle :: This should never happen! HitPoints > MaxHitPoints");
 						pawn.jobs.EndCurrentJob (JobCondition.Incompletable);
 					}
 

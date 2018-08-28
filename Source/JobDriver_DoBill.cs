@@ -4,7 +4,7 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace Mending
+namespace MendAndRecycle
 {
     public abstract class JobDriver_DoBill : JobDriver
     {

@@ -2,7 +2,7 @@
 
 using Verse;
 
-namespace Mending
+namespace MendAndRecycle
 {
     [StaticConstructorOnStartup]
     class Textures

@@ -1,4 +1,4 @@
-﻿namespace Mending
+﻿namespace MendAndRecycle
 {
     public class WorkGiver_Recycle : WorkGiver_DoBill
     {

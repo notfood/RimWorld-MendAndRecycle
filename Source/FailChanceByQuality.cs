@@ -3,7 +3,7 @@ using Verse;
 using System.Collections.Generic;
 using System;
 
-namespace Mending
+namespace MendAndRecycle
 {
     public class FailChanceByQuality : IExposable
     {

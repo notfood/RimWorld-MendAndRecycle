@@ -1,7 +1,7 @@
 ﻿using RimWorld;
 using Verse;
 
-namespace Mending
+namespace MendAndRecycle
 {
     public struct TechLevelRange : IExposable
     {

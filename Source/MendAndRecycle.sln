@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mending", "Mending.csproj", "{447D30B4-F151-4217-8740-92065F404415}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MendAndRecycle", "MendAndRecycle.csproj", "{447D30B4-F151-4217-8740-92065F404415}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

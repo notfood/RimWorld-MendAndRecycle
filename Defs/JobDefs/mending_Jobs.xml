@@ -3,13 +3,13 @@
 
     <JobDef>
         <defName>Mend</defName>
-        <driverClass>Mending.JobDriver_Mend</driverClass>
+        <driverClass>MendAndRecycle.JobDriver_Mend</driverClass>
         <reportString>Mending TargetB.</reportString>
     </JobDef>
     
     <JobDef>
         <defName>Recycle</defName>
-        <driverClass>Mending.JobDriver_Recycle</driverClass>
+        <driverClass>MendAndRecycle.JobDriver_Recycle</driverClass>
         <reportString>Recycling TargetB.</reportString>
     </JobDef>
 

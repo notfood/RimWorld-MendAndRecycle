@@ -4,7 +4,7 @@
   <WorkGiverDef>
     <defName>DoBillsMending</defName>
     <label>mend</label>
-    <giverClass>Mending.WorkGiver_Mend</giverClass>
+    <giverClass>MendAndRecycle.WorkGiver_Mend</giverClass>
     <workType>Crafting</workType>
     <priorityInType>95</priorityInType>
     <fixedBillGiverDefs>
@@ -21,7 +21,7 @@
   <WorkGiverDef>
     <defName>DoBillsRecycling</defName>
     <label>recycle</label>
-    <giverClass>Mending.WorkGiver_Recycle</giverClass>
+    <giverClass>MendAndRecycle.WorkGiver_Recycle</giverClass>
     <workType>Crafting</workType>
     <priorityInType>90</priorityInType>
     <fixedBillGiverDefs>

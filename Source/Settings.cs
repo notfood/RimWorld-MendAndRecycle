@@ -3,7 +3,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace Mending
+namespace MendAndRecycle
 {
     public class Settings : ModSettings
     {
@@ -50,8 +50,8 @@ namespace Mending
         {
             base.ExposeData();
 
-            Scribe_Deep.Look(ref TechLevelRangeUtil.PreIndustrial, "mending.PreIndustrial");
-            Scribe_Deep.Look(ref TechLevelRangeUtil.PostIndustrial, "mending.PostIndustrial");
+            Scribe_Deep.Look(ref TechLevelRangeUtil.PreIndustrial, "mendrecycle.PreIndustrial");
+            Scribe_Deep.Look(ref TechLevelRangeUtil.PostIndustrial, "mendrecycle.PostIndustrial");
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {

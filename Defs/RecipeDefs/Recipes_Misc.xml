@@ -2,7 +2,7 @@
 <Defs>
 
   <RecipeDef>
-    <workerClass>Mending.Worker</workerClass>
+    <workerClass>MendAndRecycle.Worker</workerClass>
     <defName>MendSimpleApparel</defName>
     <label>mend simple apparel</label>
     <description>Mend simple apparel.</description>
@@ -29,7 +29,7 @@
   </RecipeDef>
   
   <RecipeDef>
-    <workerClass>Mending.Worker</workerClass>
+    <workerClass>MendAndRecycle.Worker</workerClass>
     <defName>MendComplexApparel</defName>
     <label>mend complex apparel</label>
     <description>Mend armor.</description>
@@ -56,7 +56,7 @@
   </RecipeDef>
   
   <RecipeDef>
-    <workerClass>Mending.Worker</workerClass>
+    <workerClass>MendAndRecycle.Worker</workerClass>
     <defName>MendSimpleWeapon</defName>
     <label>repair simple weapon</label>
     <description>Repair weapon.</description>
@@ -86,7 +86,7 @@
   </RecipeDef>
   
   <RecipeDef>
-    <workerClass>Mending.Worker</workerClass>
+    <workerClass>MendAndRecycle.Worker</workerClass>
     <defName>MendComplexWeapon</defName>
     <label>repair complex weapon</label>
     <description>Repair weapon.</description>
@@ -115,36 +115,8 @@
     </skillRequirements>
   </RecipeDef>
   
-  <!-- We can do any ingredients, even food -->
-  <!--
   <RecipeDef>
-    <defName>MendProsthetics</defName>
-    <label>repair prosthetics</label>
-    <description>Repair prosthetics.</description>
-    <jobString>Repairing.</jobString>
-    <workAmount>50</workAmount>
-    <effectWorking>Repair</effectWorking>
-    <soundWorking>Recipe_Surgery</soundWorking>
-    <ingredients>
-      <li>
-        <filter>
-          <categories>
-            <li>BodyPartsArtificial</li>
-          </categories>
-        </filter>
-        <count>1</count>
-      </li>
-    </ingredients>
-    <fixedIngredientFilter>
-      <categories>
-        <li>BodyPartsArtificial</li>
-      </categories>
-    </fixedIngredientFilter>
-  </RecipeDef>
-  -->
-  
-  <RecipeDef>
-    <workerClass>Mending.Worker</workerClass>
+    <workerClass>MendAndRecycle.Worker</workerClass>
     <defName>RecycleApparel</defName>
     <label>recycle apparel</label>
     <description>Recycle apparel into their basic components.</description>

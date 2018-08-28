@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace Mending
+namespace MendAndRecycle
 {
     public class Worker : RecipeWorker
     {

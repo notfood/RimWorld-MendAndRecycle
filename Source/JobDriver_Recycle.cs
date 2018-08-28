@@ -5,7 +5,7 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 
-namespace Mending
+namespace MendAndRecycle
 {
     public class JobDriver_Recycle : JobDriver_DoBill
     {
@@ -92,7 +92,7 @@ namespace Mending
                         if (list.Count > 1) {
                             for (int j = 1; j < list.Count; j++) {
                                 if (!GenPlace.TryPlaceThing (list [j], pawn.Position, pawn.Map, ThingPlaceMode.Near, null)) {
-                                    Log.Error ("Mending :: " + pawn + " could not drop recipe product " + list [j] + " near " + pawn.Position);
+                                    Log.Error ("MendAndRecycle :: " + pawn + " could not drop recipe product " + list [j] + " near " + pawn.Position);
                                 }
                             }
                         } else if (list.Count == 1) {
@@ -103,7 +103,7 @@ namespace Mending
 
                             pawn.Map.reservationManager.Reserve (pawn, job, job.targetB, 1);
                         } else {
-                            Log.Message ("Mending :: " + pawn + " could not reclaim anything from " + objectThing);
+                            Log.Message ("MendAndRecycle :: " + pawn + " could not reclaim anything from " + objectThing);
                         }
 
                         ReadyForNextToil ();
