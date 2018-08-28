@@ -1,6 +1,6 @@
 # RimWorld-MendAndRecycle
 
-[![Version](https://img.shields.io/badge/Rimworld-A17-green.svg)](http://rimworldgame.com/)
+[![Version](https://img.shields.io/badge/Rimworld-A19-green.svg)](http://rimworldgame.com/)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue.svg)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 Repair the durability of your items.
@@ -15,6 +15,9 @@ Assets are [CC-BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 Code is derivate from Ludeon Studio
 
 # Thanks to
-- Wastelander, original mod
-- Skyarkhangel, A12 update
-- topp2000, A13 update
+- Wastelander (original mod)
+- Skyarkhangel, (A12 update)
+- topp2000 (A13 update)
+- NotFood (A14, A15, A16, A17, B18 updates)
+- KiameV (support)
+- Syrchalis (textures)
