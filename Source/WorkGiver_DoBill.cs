@@ -10,9 +10,6 @@ namespace Mending
     {
         static readonly IntRange ReCheckFailedBillTicksRange = new IntRange (500, 600);
 
-        static string MissingSkillTranslated;
-        static string MissingMaterialsTranslated;
-
         readonly JobDef jobDef;
 
         bool ignoreHitPoints;
@@ -33,12 +30,6 @@ namespace Mending
 
         protected WorkGiver_DoBill (JobDef job, bool ignoreHitPoints)
         {
-            if (MissingSkillTranslated == null) {
-                MissingSkillTranslated = "MissingSkill".Translate ();
-            }
-            if (MissingMaterialsTranslated == null) {
-                MissingMaterialsTranslated = "MissingMaterials".Translate ();
-            }
             jobDef = job;
             this.ignoreHitPoints = ignoreHitPoints;
         }
@@ -80,7 +71,7 @@ namespace Mending
                     if (bill.ShouldDoNow ()) {
                         if (bill.PawnAllowedToStartAnew (pawn)) {
                             if (!bill.recipe.PawnSatisfiesSkillRequirements (pawn)) {
-                                JobFailReason.Is (MissingSkillTranslated);
+                                JobFailReason.Is (ResourceBank.MissingSkill);
                             } else {
                                 Thing chosen;
                                 if (TryFindBestBillIngredients (bill, pawn, (Thing)giver, ignoreHitPoints, out chosen)) {

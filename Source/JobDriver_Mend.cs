@@ -9,7 +9,7 @@ using Verse.AI;
 
 namespace Mending
 {
-	public class JobDriver_Mend : JobDriver_DoBill
+    public class JobDriver_Mend : JobDriver_DoBill
 	{
 		const int fixedHitPointsPerCycle = 5;
 		const int fixedFailedDamage = 50;
@@ -120,7 +120,7 @@ namespace Mending
 
 						ReadyForNextToil();
 
-					} else if (objectThing.HitPoints > objectThing.MaxHitPoints) {
+                    } else if (objectThing.HitPoints > objectThing.MaxHitPoints) {
 						Log.Error("Mending :: This should never happen! HitPoints > MaxHitPoints");
 						pawn.jobs.EndCurrentJob (JobCondition.Incompletable);
 					}

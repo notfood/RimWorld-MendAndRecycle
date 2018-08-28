@@ -7,14 +7,14 @@ namespace Mending
 {
     public class FailChanceByQuality : IExposable
     {
-        private List<int> failChance;
+        List<int> failChance;
 
         public FailChanceByQuality()
         {
             var qualities = Enum.GetValues(typeof(QualityCategory));
-            this.failChance = new List<int>(qualities.Length);
+            failChance = new List<int>(qualities.Length);
             for (int i = 0; i < qualities.Length; ++i)
-                this.failChance.Add(0);
+                failChance.Add(0);
         }
 
         public int this[QualityCategory i]
@@ -25,8 +25,8 @@ namespace Mending
 
         public int this[int i]
         {
-            get { return this.failChance[i]; }
-            set { this.failChance[i] = value; }
+            get { return failChance[i]; }
+            set { failChance[i] = value; }
         }
 
         public void ExposeData()
@@ -34,16 +34,16 @@ namespace Mending
             Array qualities = Enum.GetValues(typeof(QualityCategory));
             for (int i = 0; i < qualities.Length; ++i)
             {
-                int failChance = this.failChance[i];
-                Scribe_Values.Look<int>(ref failChance, qualities.GetValue(i).ToString(), -1);
-                this.failChance[i] = failChance;
+                int chance = failChance[i];
+                Scribe_Values.Look<int>(ref chance, qualities.GetValue(i).ToString(), -1);
+                failChance[i] = chance;
             }
         }
     }
 
     public static class SuccessChanceUtil
     {
-        private static readonly Random random = new Random();
+        static readonly Random random = new Random();
 
         public static bool SuccessOnAction(float skillFactory, Thing t)
         {
@@ -55,7 +55,7 @@ namespace Mending
             return SuccessOnAction(TechLevelRangeUtil.GetTechLevel(pawn).FailChanceByQuality, skillFactory, t);
         }
 
-        private static bool SuccessOnAction(FailChanceByQuality failChanceByQuality, float skillFactor, Thing t)
+        static bool SuccessOnAction(FailChanceByQuality failChanceByQuality, float skillFactor, Thing t)
         {
             //Log.Error("Begin SuccessChanceUtil.SuccessOnAction");
             QualityCategory qc;

@@ -1,32 +1,14 @@
-﻿using RimWorld;
-using System;
+﻿using System;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
 namespace Mending
 {
-    public class SettingsController : Mod
-    {
-        public SettingsController(ModContentPack content) : base(content)
-        {
-            base.GetSettings<Settings>();
-        }
-
-        public override string SettingsCategory()
-        {
-            return "mending".Translate();
-        }
-
-        public override void DoSettingsWindowContents(Rect inRect)
-        {
-            Settings.DoSettingsWindowContents(inRect);
-        }
-    }
-
     public class Settings : ModSettings
     {
-        private static readonly int[] DEFAULT_PRE_INDUSTRIAL_FAIL_CHANCE;
-        private static readonly int[] DEFAULT_POST_INDUSTRIAL_FAIL_CHANCE;
+        static readonly int[] DEFAULT_PRE_INDUSTRIAL_FAIL_CHANCE;
+        static readonly int[] DEFAULT_POST_INDUSTRIAL_FAIL_CHANCE;
 
         static Settings()
         {
@@ -93,19 +75,19 @@ namespace Mending
             };
 
             l.Begin(rect);
-            l.Label("mending.FailChances".Translate());
+            l.Label(ResourceBank.FailChances);
             l.Gap(6);
-            l.Label("mending.PreIndustrial".Translate());
+            l.Label(ResourceBank.PreIndustrial);
             l.Gap(4);
             DrawFailChances(l, TechLevelRangeUtil.PreIndustrial, DEFAULT_PRE_INDUSTRIAL_FAIL_CHANCE);
             l.Gap(8);
-            l.Label("mending.PostIndustrial".Translate());
+            l.Label(ResourceBank.PostIndustrial);
             l.Gap(4);
             DrawFailChances(l, TechLevelRangeUtil.PostIndustrial, DEFAULT_POST_INDUSTRIAL_FAIL_CHANCE);
             l.End();
         }
 
-        private static void DrawFailChances(Listing_Standard l, TechLevelRange techLevel, int[] defaults)
+        static void DrawFailChances(Listing_Standard l, TechLevelRange techLevel, int[] defaults)
         {
             var qualities = Enum.GetValues(typeof(QualityCategory));
             for (int i = 0; i < qualities.Length; ++i)
@@ -115,7 +97,7 @@ namespace Mending
                 NumberInput(l, ((QualityCategory)i).ToString(), ref failChance, ref buffer, 0, 100);
                 techLevel.FailChanceByQuality[i] = failChance;
             }
-            if (l.ButtonText("ResetButton".Translate()))
+            if (l.ButtonText(ResourceBank.ResetButton))
             {
                 for (int i = 0; i < defaults.Length; ++i)
                 {
@@ -124,7 +106,7 @@ namespace Mending
             }
         }
 
-        private static void NumberInput(Listing_Standard l, string label, ref int val, ref string buffer, int min, int max)
+        static void NumberInput(Listing_Standard l, string label, ref int val, ref string buffer, int min, int max)
         {
             try
             {
