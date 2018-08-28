@@ -10,6 +10,8 @@ namespace MendAndRecycle
         static readonly int[] DEFAULT_PRE_INDUSTRIAL_FAIL_CHANCE;
         static readonly int[] DEFAULT_POST_INDUSTRIAL_FAIL_CHANCE;
 
+        public static bool requiresFuel;
+
         static Settings()
         {
             var qualities = Enum.GetValues(typeof(QualityCategory));
@@ -50,6 +52,8 @@ namespace MendAndRecycle
         {
             base.ExposeData();
 
+            Scribe_Values.Look(ref requiresFuel, "mendrecycle.fuel", true, true);
+
             Scribe_Deep.Look(ref TechLevelRangeUtil.PreIndustrial, "mendrecycle.PreIndustrial");
             Scribe_Deep.Look(ref TechLevelRangeUtil.PostIndustrial, "mendrecycle.PostIndustrial");
 
@@ -75,6 +79,9 @@ namespace MendAndRecycle
             };
 
             l.Begin(rect);
+            l.CheckboxLabeled(ResourceBank.RequiresFuel, ref requiresFuel, ResourceBank.RequiresFuelTooltip);
+            l.Gap(6);
+
             l.Label(ResourceBank.FailChances);
             l.Gap(6);
             l.Label(ResourceBank.PreIndustrial);

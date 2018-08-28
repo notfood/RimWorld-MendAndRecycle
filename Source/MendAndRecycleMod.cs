@@ -30,24 +30,40 @@ namespace MendAndRecycle
 
         static void Inject()
         {
-            // select and group ThingDefs by complexity
+            if (!Settings.requiresFuel) {
+                RemoveFuel();
+            }
+
+            SortApparelsInComplexity();
+        }
+
+        static void RemoveFuel() {
+            LocalDefOf.Recipe.MakeMendingKit.recipeUsers.Clear();
+            LocalDefOf.Thing.TableMending.comps.RemoveAll(p => p.GetType() == typeof(CompProperties_Refuelable));
+        }
+
+        static void SortApparelsInComplexity() {
+			// select and group ThingDefs by complexity
 			var defs = (
 				from def in DefDatabase<ThingDef>.AllDefs
 				where (def.IsApparel)
-                group def by HasComponents(def) into g
-                select new {isComplex = g.Key, list = g.ToList()}
-            );
+				group def by HasComponents(def) into g
+				select new { isComplex = g.Key, list = g.ToList() }
+			);
 
-            foreach (var def in defs)
+			foreach (var def in defs)
 			{
-                RecipeDef recipe;
-                if (def.isComplex) {
-                    recipe = LocalDefOf.Recipe.MendComplexApparel;
-                } else {
-                    recipe = LocalDefOf.Recipe.MendSimpleApparel;
-                }
+				RecipeDef recipe;
+				if (def.isComplex)
+				{
+					recipe = LocalDefOf.Recipe.MendComplexApparel;
+				}
+				else
+				{
+					recipe = LocalDefOf.Recipe.MendSimpleApparel;
+				}
 
-                AddDefToFilters(recipe, def.list);
+				AddDefToFilters(recipe, def.list);
 			}
         }
 
