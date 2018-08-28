@@ -34,19 +34,29 @@ namespace MendAndRecycle
             this.ignoreHitPoints = ignoreHitPoints;
         }
 
-        public override Job JobOnThing (Pawn pawn, Thing t, bool forced = false)
-        {
-            var billGiver = t as IBillGiver;
-
-            if (billGiver == null || !ThingIsUsableBillGiver (t) || !billGiver.CurrentlyUsableForBills () || !billGiver.BillStack.AnyShouldDoNow || !pawn.CanReserve (t, 1) || t.IsBurning () || t.IsForbidden (pawn)) {
-                return null;
-            }
-            if (!pawn.CanReach (t.InteractionCell, PathEndMode.OnCell, Danger.Some, false, TraverseMode.ByPawn)) {
-                return null;
-            }
-            billGiver.BillStack.RemoveIncompletableBills ();
-            return StartOrResumeBillJob (pawn, billGiver);
-        }
+		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
+		{
+			var billGiver = t as IBillGiver;
+			if (billGiver != null && this.ThingIsUsableBillGiver(t) && billGiver.BillStack.AnyShouldDoNow && billGiver.UsableForBillsAfterFueling())
+			{
+				LocalTargetInfo target = t;
+				if (pawn.CanReserve(target, 1, -1, null, forced) && !t.IsBurning() && !t.IsForbidden(pawn))
+				{
+					CompRefuelable compRefuelable = t.TryGetComp<CompRefuelable>();
+					if (compRefuelable == null || compRefuelable.HasFuel)
+					{
+						billGiver.BillStack.RemoveIncompletableBills();
+						return StartOrResumeBillJob(pawn, billGiver);
+					}
+					if (!RefuelWorkGiverUtility.CanRefuel(pawn, t, forced))
+					{
+						return null;
+					}
+					return RefuelWorkGiverUtility.RefuelJob(pawn, t, forced, null, null);
+				}
+			}
+			return null;
+		}
 
         bool ThingIsUsableBillGiver (Thing thing)
         {

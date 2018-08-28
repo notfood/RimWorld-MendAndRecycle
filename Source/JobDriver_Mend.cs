@@ -9,17 +9,17 @@ using Verse.AI;
 
 namespace MendAndRecycle
 {
-    public class JobDriver_Mend : JobDriver_DoBill
+	public class JobDriver_Mend : JobDriver_DoBill
 	{
 		const int fixedHitPointsPerCycle = 5;
 		const int fixedFailedDamage = 50;
 
-        readonly FieldInfo ApparelWornByCorpseInt = typeof (Apparel).GetField ("wornByCorpseInt", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+		readonly FieldInfo ApparelWornByCorpseInt = typeof(Apparel).GetField("wornByCorpseInt", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
 		float workCycle;
 		float workCycleProgress;
 
-        public override bool TryMakePreToilReservations(bool errorOnFailed)
+		public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
             return true;
         }
@@ -28,6 +28,7 @@ namespace MendAndRecycle
 		{
 			var objectThing = job.GetTarget(objectTI).Thing;
 			var tableThing = job.GetTarget(tableTI).Thing as Building_WorkTable;
+			var refuelableComp = tableThing.GetComp<CompRefuelable>();
 
 			var toil = new Toil ();
 			toil.initAction = delegate {
@@ -43,7 +44,8 @@ namespace MendAndRecycle
 				workCycleProgress -= StatExtension.GetStatValue (pawn, StatDefOf.WorkToMake, true);
 
 				tableThing.UsedThisTick ();
-				if (!tableThing.CurrentlyUsableForBills()) {
+
+				if (! (tableThing.CurrentlyUsableForBills() && (refuelableComp == null || refuelableComp.HasFuel)) ) {
 					pawn.jobs.EndCurrentJob (JobCondition.Incompletable);
 				}
 
