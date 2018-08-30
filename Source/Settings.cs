@@ -10,8 +10,8 @@ namespace MendAndRecycle
         static readonly int[] DEFAULT_PRE_INDUSTRIAL_FAIL_CHANCE;
         static readonly int[] DEFAULT_POST_INDUSTRIAL_FAIL_CHANCE;
 
-        public static bool requiresFuel;
-		public static bool requiresPower;
+        public static bool requiresFuel = true;
+		public static bool requiresPower = true;
 
         static Settings()
         {
