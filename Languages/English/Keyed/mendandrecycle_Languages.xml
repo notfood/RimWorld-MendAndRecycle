@@ -4,6 +4,8 @@
 	<!-- Settings -->
     <mendrecycle.RequiresFuel>Requires Fuel</mendrecycle.RequiresFuel>
     <mendrecycle.RequiresFuelTooltip>Does the mending table need mending kits? (Needs restart)</mendrecycle.RequiresFuelTooltip>
+    <mendrecycle.RequiresPower>Requires Power</mendrecycle.RequiresPower>
+    <mendrecycle.RequiresPowerTooltip>Does the mending table require power? (Needs restart)</mendrecycle.RequiresPowerTooltip>
     
 	<mendrecycle.FailChances>Fail Chance for Item Quality (0% to 100%)</mendrecycle.FailChances>
 	<mendrecycle.PreIndustrial>Pre-Industial Colony Tech Level</mendrecycle.PreIndustrial>

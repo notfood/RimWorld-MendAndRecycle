@@ -33,6 +33,10 @@ namespace MendAndRecycle
             if (!Settings.requiresFuel) {
                 RemoveFuel();
             }
+			if (!Settings.requiresPower)
+			{
+				RemovePower();
+			}
 
             SortApparelsInComplexity();
         }
@@ -41,6 +45,10 @@ namespace MendAndRecycle
             LocalDefOf.Recipe.MakeMendingKit.recipeUsers.Clear();
             LocalDefOf.Thing.TableMending.comps.RemoveAll(p => p.GetType() == typeof(CompProperties_Refuelable));
         }
+		static void RemovePower()
+		{
+			LocalDefOf.Thing.TableMending.comps.RemoveAll(p => p.GetType() == typeof(CompProperties_Power));
+		}
 
         static void SortApparelsInComplexity() {
 			// select and group ThingDefs by complexity

@@ -11,6 +11,7 @@ namespace MendAndRecycle
         static readonly int[] DEFAULT_POST_INDUSTRIAL_FAIL_CHANCE;
 
         public static bool requiresFuel;
+		public static bool requiresPower;
 
         static Settings()
         {
@@ -53,6 +54,7 @@ namespace MendAndRecycle
             base.ExposeData();
 
             Scribe_Values.Look(ref requiresFuel, "mendrecycle.fuel", true, true);
+			Scribe_Values.Look(ref requiresPower, "mendrecycle.power", true, true);
 
             Scribe_Deep.Look(ref TechLevelRangeUtil.PreIndustrial, "mendrecycle.PreIndustrial");
             Scribe_Deep.Look(ref TechLevelRangeUtil.PostIndustrial, "mendrecycle.PostIndustrial");
@@ -80,6 +82,7 @@ namespace MendAndRecycle
 
             l.Begin(rect);
             l.CheckboxLabeled(ResourceBank.RequiresFuel, ref requiresFuel, ResourceBank.RequiresFuelTooltip);
+			l.CheckboxLabeled(ResourceBank.RequiresPower, ref requiresPower, ResourceBank.RequiresPowerTooltip);
             l.Gap(6);
 
             l.Label(ResourceBank.FailChances);

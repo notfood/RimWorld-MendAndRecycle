@@ -8,6 +8,9 @@ namespace MendAndRecycle
 
         public static readonly string RequiresFuel = "mendrecycle.RequiresFuel".Translate();
         public static readonly string RequiresFuelTooltip = "mendrecycle.RequiresFuelTooltip".Translate();
+		public static readonly string RequiresPower = "mendrecycle.RequiresPower".Translate();
+		public static readonly string RequiresPowerTooltip = "mendrecycle.RequiresPowerTooltip".Translate();
+
         public static readonly string FailChances = "mendrecycle.FailChances".Translate();
         public static readonly string PreIndustrial = "mendrecycle.PreIndustrial".Translate();
         public static readonly string PostIndustrial = "mendrecycle.PostIndustrial".Translate();
