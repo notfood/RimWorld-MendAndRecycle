@@ -5,7 +5,7 @@
     <defName>MakeMendingKit</defName>
     <label>make mending kits</label>
     <description>Crafts mending kits from materials. Produces enough to re-stock the mending table.</description>
-    <jobString>Crafting meding kit.</jobString>
+    <jobString>Crafting mending kit.</jobString>
     <workAmount>500</workAmount>
     <workSpeedStat>SmithingSpeed</workSpeedStat>
     <effectWorking>Smith</effectWorking>
