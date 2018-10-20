@@ -1,6 +1,6 @@
 # RimWorld-MendAndRecycle
 
-[![Version](https://img.shields.io/badge/Rimworld-A19-green.svg)](http://rimworldgame.com/)
+[![Version](https://img.shields.io/badge/Rimworld-1.0-green.svg)](http://rimworldgame.com/)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue.svg)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 Repair the durability of your items.

@@ -2,7 +2,7 @@
 <ModSyncNinjaData>
   <ID>09123b8a-49a2-42cd-8893-50f21ddfb8b2</ID>
   <ModName>MendAndRecycle</ModName>
-  <Version>0.19.0.1</Version>
+  <Version>1.0.1.0</Version>
   <SaveBreaking>False</SaveBreaking>
   <Host name="Github">
     <Owner>notfood</Owner>

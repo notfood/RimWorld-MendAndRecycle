@@ -2,14 +2,14 @@
   <name>MendAndRecycle</name>
   <author>NotFood</author>
   <url>https://ludeon.com/forums/index.php?topic=22894.0</url>
-  <targetVersion>0.19.0</targetVersion>
+  <targetVersion>1.0.0</targetVersion>
   <description>Repair the durability of items or just recycle them.
 
 Thank You
 -Wastelander (original mod)
 -Skyarkhangel, (A12 update)
 -topp2000 (A13 update)
--NotFood (A14, A15, A16, A17, B18 updates)
+-NotFood (A14, A15, A16, A17, B18, B19 updates)
 -KiameV (support)
 -Syrchalis for the great mending table and mending kit textures!</description>
 </ModMetaData>
