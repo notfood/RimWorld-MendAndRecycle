@@ -7,7 +7,7 @@ Repair the durability of your items.
 
 This mod is a rewrite of the original Mending by Wastelander. It introduces the Mending Table and allows you to completely repair the durability of weapons, clothes and armor. Alongside the Recycle job found in the tailoring benches where materials are recycled for reuse.
 
-You need to research Mending in order to build the Mending Table, it requires mending kits built in the electric tailoring workbench, easy version doesn't require them. Work modifiers apply so you can speed up the work done.
+You need to research Mending in order to build the Mending Table, it optionally requires power and mending kits as fuel, change them as you see fit in the mod settings. Work modifiers apply so you can speed up the work done. There is a chance to fail the work, in such case some damage will be done to the item, only risky if it's low hp already, you can modify the chances in the mod settings.
 
 # Licence
 Assets are [CC-BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)

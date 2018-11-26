@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MendRecycle>MendAndRecycle</MendRecycle>
+  
+  <!-- Settings -->
+  <MendRecycle.RequiresFuel>Requires Fuel</MendRecycle.RequiresFuel>
+  <MendRecycle.RequiresFuelTooltip>Does the mending table need mending kits? (Needs restart)</MendRecycle.RequiresFuelTooltip>
+  <MendRecycle.RequiresPower>Requires Power</MendRecycle.RequiresPower>
+  <MendRecycle.RequiresPowerTooltip>Does the mending table require power? (Needs restart)</MendRecycle.RequiresPowerTooltip>
+  
+  <MendRecycle.MaxHPCost>Percentage of Max Hit Points in play</MendRecycle.MaxHPCost>
+  <MendRecycle.FailChances>Fail Chance per Tech Level</MendRecycle.FailChances>
+  
+</LanguageData>

@@ -4,7 +4,7 @@
   <WorkGiverDef>
     <defName>DoBillsMending</defName>
     <label>mend</label>
-    <giverClass>MendAndRecycle.WorkGiver_Mend</giverClass>
+    <giverClass>MendAndRecycle.WorkGiver_DoBill</giverClass>
     <workType>Crafting</workType>
     <priorityInType>95</priorityInType>
     <fixedBillGiverDefs>
@@ -17,20 +17,20 @@
     </requiredCapacities>
     <prioritizeSustains>true</prioritizeSustains>
   </WorkGiverDef>
-
+  
   <WorkGiverDef>
-    <defName>DoBillsRecycling</defName>
-    <label>recycle</label>
-    <giverClass>MendAndRecycle.WorkGiver_Recycle</giverClass>
-    <workType>Crafting</workType>
-    <priorityInType>90</priorityInType>
+    <defName>DoBillsMakeApparel</defName>
+    <label>make apparel</label>
+    <giverClass>MendAndRecycle.WorkGiver_DoBill</giverClass>
+    <workType>Tailoring</workType>
+    <priorityInType>110</priorityInType>
     <fixedBillGiverDefs>
       <li>ElectricTailoringBench</li>
       <li>HandTailoringBench</li>
     </fixedBillGiverDefs>
-    <verb>recycle</verb>
-    <gerund>recycling</gerund>
-     <requiredCapacities>
+    <verb>tailor</verb>
+    <gerund>tailoring at</gerund>
+    <requiredCapacities>
       <li>Manipulation</li>
     </requiredCapacities>
     <prioritizeSustains>true</prioritizeSustains>

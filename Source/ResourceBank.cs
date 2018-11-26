@@ -1,22 +1,62 @@
-﻿using Verse;
+﻿using RimWorld;
+using UnityEngine;
+using Verse;
 
 namespace MendAndRecycle
 {
     public static class ResourceBank
     {
-        public static readonly string MendAndRecycle = "mendrecycle".Translate();
+        public static class Strings
+        {
+            const string PREFIX = "MendRecycle.";
 
-        public static readonly string RequiresFuel = "mendrecycle.RequiresFuel".Translate();
-        public static readonly string RequiresFuelTooltip = "mendrecycle.RequiresFuelTooltip".Translate();
-		public static readonly string RequiresPower = "mendrecycle.RequiresPower".Translate();
-		public static readonly string RequiresPowerTooltip = "mendrecycle.RequiresPowerTooltip".Translate();
+            static string TL(string s) => (PREFIX + s).Translate();
 
-        public static readonly string FailChances = "mendrecycle.FailChances".Translate();
-        public static readonly string PreIndustrial = "mendrecycle.PreIndustrial".Translate();
-        public static readonly string PostIndustrial = "mendrecycle.PostIndustrial".Translate();
+            public static readonly string MendAndRecycle = "MendRecycle".Translate();
 
-        public static readonly string ResetButton = "ResetButton".Translate();
-        public static readonly string MissingSkill = "MissingSkill".Translate();
-        //public static readonly string MissingMaterials = "MissingMaterials".Translate();
+            public static readonly string RequiresFuel = TL("RequiresFuel");
+            public static readonly string RequiresFuelTooltip = TL("RequiresFuelTooltip");
+            public static readonly string RequiresPower = TL("RequiresPower");
+            public static readonly string RequiresPowerTooltip = TL("RequiresPowerTooltip");
+            public static readonly string MaxHPCost = TL("MaxHPCost");
+            public static readonly string FailChances = TL("FailChances");
+        }
+
+        [DefOf]
+        public static class Recipe
+        {
+            public static RecipeDef MendSimpleApparel;
+            public static RecipeDef MendComplexApparel;
+            public static RecipeDef MendSimpleWeapon;
+            public static RecipeDef MendComplexWeapon;
+            public static RecipeDef MakeMendingKit;
+        }
+
+        [DefOf]
+        public static class Job
+        {
+            public static JobDef Mend;
+            public static JobDef Recycle;
+        }
+
+        [DefOf]
+        public static class Thing
+        {
+            public static ThingDef TableMending;
+        }
+
+        [DefOf]
+        public static class ResearchProject
+        {
+            public static ResearchProjectDef Mending;
+            public static ResearchProjectDef Electricity;
+        }
+
+        [StaticConstructorOnStartup]
+        public static class Textures
+        {
+            public static readonly Texture2D Outside = ContentFinder<Texture2D>.Get("UI/Designators/NoRoofArea", true);
+            public static readonly Texture2D Inside = ContentFinder<Texture2D>.Get("UI/Designators/HomeAreaOn", true);
+        }
     }
 }

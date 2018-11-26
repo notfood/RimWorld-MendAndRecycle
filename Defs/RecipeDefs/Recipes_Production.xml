@@ -21,9 +21,9 @@
       </li>
       <li>
         <filter>
-          <thingDefs>
-            <li>Cloth</li>
-          </thingDefs>
+          <categories>
+            <li>Textiles</li>
+          </categories>
         </filter>
         <count>30</count>
       </li>
@@ -31,8 +31,10 @@
     <fixedIngredientFilter>
       <thingDefs>
         <li>Steel</li>
-        <li>Cloth</li>
       </thingDefs>
+      <categories>
+        <li>Textiles</li>
+      </categories>
     </fixedIngredientFilter>
     <products>
       <MendingKit>5</MendingKit>
@@ -42,9 +44,9 @@
     </skillRequirements>
     <workSkill>Crafting</workSkill>
     <recipeUsers>
-        <li>ElectricTailoringBench</li>
+      <li>TableMending</li>
+      <li>CraftingSpot</li>
     </recipeUsers>
-    <researchPrerequisite>Mending</researchPrerequisite>
   </RecipeDef>
 
 </Defs>

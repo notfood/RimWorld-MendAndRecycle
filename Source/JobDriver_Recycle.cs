@@ -9,29 +9,30 @@ namespace MendAndRecycle
 {
     public class JobDriver_Recycle : JobDriver_DoBill
     {
-        const int fixedHitPointsPerCycle = 5;
-        const int fixedFailedDamage = 50;
-
+        int costHitPointsPerCycle;
         int processedHitPoints;
         float workCycle;
         float workCycleProgress;
 
         protected override Toil DoBill ()
         {
-            var objectThing = job.GetTarget (objectTI).Thing;
-            var qualityComponent = objectThing.TryGetComp<CompQuality> ();
-            var tableThing = job.GetTarget (tableTI).Thing as Building_WorkTable;
+            var tableThing = job.GetTarget (BillGiverInd).Thing as Building_WorkTable;
             var tablePowerTraderComp = tableThing.GetComp<CompPowerTrader> ();
 
             var toil = new Toil ();
             toil.initAction = delegate {
+                var objectThing = job.GetTarget(IngredientInd).Thing;
+
                 job.bill.Notify_DoBillStarted (pawn);
 
+                costHitPointsPerCycle = (int) (objectThing.MaxHitPoints * Settings.costFromMaxHitPoints);
                 processedHitPoints = 0;
 
                 workCycleProgress = workCycle = Math.Max (job.bill.recipe.workAmount, 10f);
             };
             toil.tickAction = delegate {
+                var objectThing = job.GetTarget(IngredientInd).Thing;
+
                 if (objectThing == null || objectThing.Destroyed) {
                     pawn.jobs.EndCurrentJob (JobCondition.Incompletable);
                 }
@@ -44,12 +45,12 @@ namespace MendAndRecycle
                 }
 
                 if (workCycleProgress <= 0) {
-                    objectThing.HitPoints -= fixedHitPointsPerCycle;
+                    objectThing.HitPoints -= costHitPointsPerCycle;
 
                     if (tablePowerTraderComp != null && tablePowerTraderComp.PowerOn) {
-                        processedHitPoints += fixedHitPointsPerCycle;
+                        processedHitPoints += costHitPointsPerCycle;
                     } else {
-                        processedHitPoints += fixedHitPointsPerCycle / 2;
+                        processedHitPoints += costHitPointsPerCycle / 2;
                     }
 
                     float skillPerc = 0.5f;
@@ -65,16 +66,11 @@ namespace MendAndRecycle
                         }
                     }
 
-                    if (qualityComponent != null && qualityComponent.Quality > QualityCategory.Awful) {
-                        var qc = qualityComponent.Quality;
+                    if (Settings.chances[objectThing.def.techLevel] > 1 - Mathf.Pow(Rand.Value, 1 + skillPerc * 3f))
+                    {
+                        objectThing.HitPoints -= Rand.RangeInclusive(costHitPointsPerCycle, costHitPointsPerCycle * 4);
 
-                        float skillFactor = Mathf.Lerp (0.5f, 1.5f, skillPerc);
-
-                        if (!SuccessChanceUtil.SuccessOnAction(pawn, skillFactor, objectThing)) {
-                            objectThing.HitPoints -= fixedFailedDamage;
-
-                            MoteMaker.ThrowText (pawn.DrawPos, pawn.Map, "Failed");
-                        }
+                        MoteMaker.ThrowText(pawn.DrawPos, pawn.Map, "Failed");
                     }
 
                     pawn.GainComfortFromCellIfPossible ();
@@ -113,9 +109,11 @@ namespace MendAndRecycle
                 }
             };
             toil.defaultCompleteMode = ToilCompleteMode.Never;
-            toil.WithEffect (() => job.bill.recipe.effectWorking, tableTI);
+            toil.WithEffect (() => job.bill.recipe.effectWorking, BillGiverInd);
             toil.PlaySustainerOrSound (() => toil.actor.CurJob.bill.recipe.soundWorking);
-            toil.WithProgressBar (tableTI, delegate {
+            toil.WithProgressBar (BillGiverInd, delegate {
+                var objectThing = job.GetTarget(IngredientInd).Thing;
+
                 return (float)objectThing.HitPoints / (float)objectThing.MaxHitPoints;
             }, false, 0.5f);
             toil.FailOn (() => {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-
+  
   <ThingDef ParentName="BenchBase">
     <defName>TableMending</defName>
     <label>mending workbench</label>
@@ -44,13 +44,6 @@
     <hasInteractionCell>True</hasInteractionCell>
     <interactionCellOffset>(0,0,-1)</interactionCellOffset>
     <surfaceType>Item</surfaceType>
-     <recipes>
-      <li>MendSimpleApparel</li>
-      <li>MendComplexApparel</li>
-      <li>MendSimpleWeapon</li>
-      <li>MendComplexWeapon</li>
-      <!--<li>MendProsthetics</li>-->
-    </recipes>
     <inspectorTabs>
       <li>ITab_Bills</li>
     </inspectorTabs>
@@ -88,5 +81,5 @@
       <li>Mending</li>
     </researchPrerequisites>
   </ThingDef>
-
+  
 </Defs>

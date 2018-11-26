@@ -1,38 +1,57 @@
 ﻿using System.Collections.Generic;
 
 using RimWorld;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
 namespace MendAndRecycle
 {
-    public abstract class JobDriver_DoBill : JobDriver
+    public abstract class JobDriver_DoBill : Verse.AI.JobDriver_DoBill
     {
-        public const TargetIndex tableTI = TargetIndex.A;
-        public const TargetIndex objectTI = TargetIndex.B;
-        public const TargetIndex haulTI = TargetIndex.C;
-
         protected override IEnumerable<Toil> MakeNewToils ()
         {
-            this.FailOnDestroyedNullOrForbidden (tableTI);
-            this.FailOnBurningImmobile (objectTI);
-            this.FailOnDestroyedNullOrForbidden (objectTI);
-            this.FailOnBurningImmobile (objectTI);
-            yield return Toils_Reserve.Reserve (tableTI, 1);
-            yield return Toils_Reserve.Reserve (objectTI, 1);
-            yield return Toils_Goto.GotoThing (objectTI, PathEndMode.Touch);
-            yield return Toils_Haul.StartCarryThing (objectTI);
-            yield return Toils_Goto.GotoThing (tableTI, PathEndMode.InteractionCell);
-            yield return Toils_Haul.PlaceHauledThingInCell (tableTI, null, false);
-            yield return DoBill ();
-            yield return Store ();
-            yield return Toils_Reserve.Reserve (haulTI, 1);
-            yield return Toils_Haul.CarryHauledThingToCell (haulTI);
-            yield return Toils_Haul.PlaceHauledThingInCell (haulTI, null, false);
-            yield return Toils_Reserve.Release (objectTI);
-            yield return Toils_Reserve.Release (haulTI);
-            yield return Toils_Reserve.Release (tableTI);
+            AddEndCondition(delegate {
+                var thing = GetActor().jobs.curJob.GetTarget(BillGiverInd).Thing;
+                if (thing is Building && !thing.Spawned)
+                {
+                    return JobCondition.Incompletable;
+                }
+                return JobCondition.Ongoing;
+            });
+            this.FailOnBurningImmobile(BillGiverInd);
+            this.FailOn(delegate {
+                if (job.GetTarget(BillGiverInd).Thing is IBillGiver billGiver)
+                {
+                    if (job.bill.DeletedOrDereferenced)
+                    {
+                        return true;
+                    }
+                    if (!billGiver.CurrentlyUsableForBills())
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            });
 
+            yield return Toils_Reserve.Reserve(BillGiverInd, 1);
+            yield return Toils_Reserve.ReserveQueue(IngredientInd, 1);
+            yield return Toils_JobTransforms.ExtractNextTargetFromQueue(IngredientInd);
+            yield return Toils_Goto.GotoThing(IngredientInd, PathEndMode.Touch);
+            yield return Toils_Haul.StartCarryThing(IngredientInd);
+            yield return Toils_Goto.GotoThing(BillGiverInd, PathEndMode.InteractionCell);
+            yield return Toils_JobTransforms.SetTargetToIngredientPlaceCell(BillGiverInd, IngredientInd, IngredientPlaceCellInd);
+            yield return Toils_Haul.PlaceHauledThingInCell(BillGiverInd, null, false);
+            yield return Toils_Reserve.Reserve(IngredientInd, 1);
+            yield return DoBill();
+            yield return Store();
+            yield return Toils_Reserve.Reserve(IngredientPlaceCellInd, 1);
+            yield return Toils_Haul.CarryHauledThingToCell(IngredientPlaceCellInd);
+            yield return Toils_Haul.PlaceHauledThingInCell(IngredientPlaceCellInd, null, false);
+            yield return Toils_Reserve.Release(IngredientInd);
+            yield return Toils_Reserve.Release(IngredientPlaceCellInd);
+            yield return Toils_Reserve.Release(BillGiverInd);
             yield break;
         }
 
@@ -42,13 +61,26 @@ namespace MendAndRecycle
         {
             return new Toil () {
                 initAction = delegate {
-                    var objectThing = job.GetTarget (objectTI).Thing;
+                    var objectThing = job.GetTarget (IngredientInd).Thing;
 
                     if (job.bill.GetStoreMode () != BillStoreModeDefOf.DropOnFloor) {
-                        IntVec3 vec;
-                        if (StoreUtility.TryFindBestBetterStoreCellFor (objectThing, pawn, pawn.Map, StoragePriority.Unstored, pawn.Faction, out vec, true)) {
-                            pawn.carryTracker.TryStartCarry (objectThing, objectThing.stackCount);
-                            job.SetTarget (haulTI, vec);
+                        IntVec3 vec = IntVec3.Invalid;
+                        if (job.bill.GetStoreMode() == BillStoreModeDefOf.BestStockpile)
+                        {
+                            StoreUtility.TryFindBestBetterStoreCellFor(objectThing, pawn, pawn.Map, StoragePriority.Unstored, pawn.Faction, out vec, true);
+                        }
+                        else if (job.bill.GetStoreMode() == BillStoreModeDefOf.SpecificStockpile)
+                        {
+                            StoreUtility.TryFindBestBetterStoreCellForIn(objectThing, pawn, pawn.Map, StoragePriority.Unstored, pawn.Faction, job.bill.GetStoreZone().slotGroup, out vec, true);
+                        }
+                        else
+                        {
+                            Log.ErrorOnce("Unknown store mode", 9158246, false);
+                        }
+                        if (vec.IsValid)
+                        {
+                            pawn.carryTracker.TryStartCarry(objectThing, objectThing.stackCount);
+                            job.SetTarget(IngredientPlaceCellInd, vec);
                             job.count = 99999;
                             return;
                         }
@@ -59,20 +91,6 @@ namespace MendAndRecycle
                     pawn.jobs.EndCurrentJob (JobCondition.Succeeded);
                 }
             };
-        }
-
-        public override string GetReport ()
-        {
-            if (job.RecipeDef != null) {
-                return ReportStringProcessed (job.RecipeDef.jobString);
-            }
-            return base.GetReport ();
-        }
-
-        public override bool TryMakePreToilReservations (bool errorOnFailed)
-        {
-            pawn.ReserveAsManyAsPossible (job.GetTargetQueue (TargetIndex.B), job, 1);
-            return pawn.Reserve (job.GetTarget (TargetIndex.A), job, 1);
         }
     }
 }
