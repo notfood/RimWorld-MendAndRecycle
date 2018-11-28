@@ -91,18 +91,22 @@ namespace MendAndRecycle
                                     Log.Error ("MendAndRecycle :: " + pawn + " could not drop recipe product " + list [j] + " near " + pawn.Position);
                                 }
                             }
-                        } else if (list.Count == 1) {
+                        }
+
+                        if (list.Count >= 1) {
                             list [0].SetPositionDirect (pawn.Position);
 
                             job.bill.Notify_IterationCompleted (pawn, list);
-                            job.targetB = list [0];
+                            job.SetTarget(IngredientInd, list[0]);
 
-                            pawn.Map.reservationManager.Reserve (pawn, job, job.targetB, 1);
+                            pawn.Map.reservationManager.Reserve (pawn, job, job.GetTarget(IngredientInd), 1);
+
+                            ReadyForNextToil();
                         } else {
                             Log.Message ("MendAndRecycle :: " + pawn + " could not reclaim anything from " + objectThing);
-                        }
 
-                        ReadyForNextToil ();
+                            pawn.jobs.EndCurrentJob(JobCondition.Succeeded);
+                        }
                     }
 
                     workCycleProgress = workCycle;
