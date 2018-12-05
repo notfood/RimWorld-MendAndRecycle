@@ -52,7 +52,7 @@ namespace MendAndRecycle
             // select and group ThingDefs by complexity
             var query = (
                 from def in DefDatabase<ThingDef>.AllDefs
-                where def.IsApparel ||  def.IsWeapon
+                where def.useHitPoints && (def.IsApparel ||  def.IsWeapon)
                 select new { def = def, isComplex = HasComponents(def), isApparel = def.IsApparel}
             );
 
