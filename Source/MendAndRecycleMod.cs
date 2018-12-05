@@ -108,6 +108,9 @@ namespace MendAndRecycle
                 min = 0f, max = 0.99f
             };
 
+            recipe.defaultIngredientFilter = filter;
+            recipe.fixedIngredientFilter = filter;
+
             return filter;
         }
     }
