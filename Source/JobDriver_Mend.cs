@@ -110,8 +110,7 @@ namespace MendAndRecycle
                     } else if (objectThing.HitPoints == objectThing.MaxHitPoints) {
                         // fixed!
 
-                        var mendApparel = objectThing as Apparel;
-                        if (mendApparel != null) {
+                        if (Settings.removesDeadman && objectThing is Apparel mendApparel) {
                             ApparelWornByCorpseInt.SetValue(mendApparel, false);
                         }
 

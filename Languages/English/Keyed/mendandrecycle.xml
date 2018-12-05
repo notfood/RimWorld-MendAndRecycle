@@ -3,6 +3,8 @@
   <MendRecycle>MendAndRecycle</MendRecycle>
   
   <!-- Settings -->
+  <MendRecycle.RemovesDeadman>Removes Deadman from Apparel</MendRecycle.RemovesDeadman>
+  <MendRecycle.RemovesDeadmanTooltip>Does fully fixing an apparel in the mending table remove the deadman tag?</MendRecycle.RemovesDeadmanTooltip>
   <MendRecycle.RequiresFuel>Requires Fuel</MendRecycle.RequiresFuel>
   <MendRecycle.RequiresFuelTooltip>Does the mending table need mending kits? (Needs restart)</MendRecycle.RequiresFuelTooltip>
   <MendRecycle.RequiresPower>Requires Power</MendRecycle.RequiresPower>

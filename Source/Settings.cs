@@ -22,6 +22,7 @@ namespace MendAndRecycle
             {TechLevel.Archotech, 0.25f}
         };
 
+        public static bool removesDeadman = true;
         public static bool requiresFuel = true;
         public static bool requiresPower = true;
 
@@ -31,6 +32,7 @@ namespace MendAndRecycle
         {
             base.ExposeData();
 
+            Scribe_Values.Look(ref removesDeadman, "removesDeadman", true, true);
             Scribe_Values.Look(ref requiresFuel, "requiresFuel", true, true);
             Scribe_Values.Look(ref requiresPower, "requiresPower", true, true);
 
@@ -51,6 +53,8 @@ namespace MendAndRecycle
             };
 
             l.Begin(rect);
+
+            l.CheckboxLabeled(ResourceBank.Strings.RemovesDeadman, ref removesDeadman, ResourceBank.Strings.RemovesDeadmanTooltip);
             l.CheckboxLabeled(ResourceBank.Strings.RequiresFuel, ref requiresFuel, ResourceBank.Strings.RequiresFuelTooltip);
             l.CheckboxLabeled(ResourceBank.Strings.RequiresPower, ref requiresPower, ResourceBank.Strings.RequiresPowerTooltip);
 
