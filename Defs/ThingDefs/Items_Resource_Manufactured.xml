@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
   
-  <ThingDef Name="ResourceBase" Abstract="True">
+  <ThingDef Name="ResourceBase_MnR" Abstract="True">
     <thingClass>ThingWithComps</thingClass>
     <category>Item</category>
     <resourceReadoutPriority>Middle</resourceReadoutPriority>
@@ -21,7 +21,7 @@
     <pathCost>15</pathCost>
   </ThingDef>
   
-  <ThingDef ParentName="ResourceBase">
+  <ThingDef ParentName="ResourceBase_MnR">
     <defName>MendingKit</defName>
     <label>mending kit</label>
     <description>Miscellaneous cloth, bits and parts. Necessary for repairing weapons and mending apparel.</description>
