@@ -17,6 +17,15 @@ namespace MendAndRecycle
         float workCycle;
         float workCycleProgress;
 
+        public override void ExposeData()
+        {
+            base.ExposeData();
+
+            Scribe_Values.Look(ref costHitPointsPerCycle, "costHitPointsPerCycle", 1);
+            Scribe_Values.Look(ref workCycle, "workCycle", 1f);
+            Scribe_Values.Look(ref workCycleProgress, "workCycleProgress", 1f);
+        }
+
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
             return true;

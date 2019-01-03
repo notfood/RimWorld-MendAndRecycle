@@ -14,6 +14,16 @@ namespace MendAndRecycle
         float workCycle;
         float workCycleProgress;
 
+        public override void ExposeData()
+        {
+            base.ExposeData();
+
+            Scribe_Values.Look(ref costHitPointsPerCycle, "costHitPointsPerCycle", 1);
+            Scribe_Values.Look(ref processedHitPoints, "processedHitPoints", 1);
+            Scribe_Values.Look(ref workCycle, "workCycle", 1f);
+            Scribe_Values.Look(ref workCycleProgress, "workCycleProgress", 1f);
+        }
+
         protected override Toil DoBill ()
         {
             var tableThing = job.GetTarget (BillGiverInd).Thing as Building_WorkTable;
