@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+
+  <MendRecycle>MendAndRecycle</MendRecycle>
+
+  <!-- Settings -->
+
+  <!-- EN: Removes Deadman from Apparel -->
+  <MendRecycle.RemovesDeadman>Убирать отметку "Снято с трупа" с одежды</MendRecycle.RemovesDeadman>
+
+  <!-- EN: Does fully fixing an apparel in the mending table remove the deadman tag? -->
+  <MendRecycle.RemovesDeadmanTooltip>Должен ли полный ремонт вещей на верстаке снимать отметку "снято с трупа"?</MendRecycle.RemovesDeadmanTooltip>
+
+  <!-- EN: Requires Fuel -->
+  <MendRecycle.RequiresFuel>Необходимость топлива</MendRecycle.RequiresFuel>
+
+  <!-- EN: Does the mending table need mending kits? (Needs restart) -->
+  <MendRecycle.RequiresFuelTooltip>Нужны ли ремонтные наборы для верстака? (Требуется рестарт)</MendRecycle.RequiresFuelTooltip>
+
+  <!-- EN: Requires Power -->
+  <MendRecycle.RequiresPower>Необходимость электричества</MendRecycle.RequiresPower>
+
+  <!-- EN: Does the mending table require power? (Needs restart) -->
+  <MendRecycle.RequiresPowerTooltip>Нужно ли электричество для работы на ремонтном верстаке? (Требуется рестарт)</MendRecycle.RequiresPowerTooltip>
+
+  <!-- EN: Percentage of Max Hit Points in play -->
+  <MendRecycle.MaxHPCost>Скорость ремонта/переработки, процент от максимальной прочности вещи.</MendRecycle.MaxHPCost>
+
+  <!-- EN: Fail Chance per Tech Level -->
+  <MendRecycle.FailChances>Шанс ошибки, зависящий от текущего Уровня развития</MendRecycle.FailChances>
+  
+</LanguageData>

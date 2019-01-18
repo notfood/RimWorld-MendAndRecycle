@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+  
+	<!-- EN: mending workbench -->
+	<TableMending.label>ремонтный верстак</TableMending.label> 
+	
+	<!-- EN: A workbench equipped with all the tools required to mend and repair damaged items. Requires power and consumes mending kits. Mending kits can be made in the crafting spot first. -->
+	<TableMending.description>Верстак, оборудованный всеми необходимыми инструментами для ремонта поврежденных вещей. Требует электричество и ремонтные наборы. Изначально ремонтные наборы могут быть сделаны на Рабочем месте.</TableMending.description> 
+	
+</LanguageData>
