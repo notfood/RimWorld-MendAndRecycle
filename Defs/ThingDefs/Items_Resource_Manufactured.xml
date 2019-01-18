@@ -27,7 +27,8 @@
     <description>Miscellaneous cloth, bits and parts. Necessary for repairing weapons and mending apparel.</description>
     <graphicData>
       <texPath>Things/Item/Resource/MendingKit</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.85</drawSize>
     </graphicData>
     <soundInteract>Standard_Drop</soundInteract>
     <soundDrop>Standard_Drop</soundDrop>

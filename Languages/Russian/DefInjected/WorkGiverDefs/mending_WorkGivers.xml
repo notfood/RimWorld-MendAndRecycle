@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+  
+	<!-- EN: mend -->
+	<DoBillsMending.label>чинить поврежденные вещи</DoBillsMending.label> 
+	
+	<!-- EN: mending -->
+	<DoBillsMending.gerund>починить вещи, используя</DoBillsMending.gerund>
+	
+	<!-- EN: mend -->	
+	<DoBillsMending.verb>починить вещи, используя</DoBillsMending.verb> 
+
+</LanguageData>
