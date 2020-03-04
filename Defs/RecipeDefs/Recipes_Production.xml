@@ -7,7 +7,7 @@
     <description>Crafts mending kits from materials. Produces enough to re-stock the mending table.</description>
     <jobString>Crafting mending kit.</jobString>
     <workAmount>500</workAmount>
-    <workSpeedStat>SmithingSpeed</workSpeedStat>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Smith</effectWorking>
     <soundWorking>Recipe_Smith</soundWorking>
     <ingredients>
@@ -44,8 +44,8 @@
     </skillRequirements>
     <workSkill>Crafting</workSkill>
     <recipeUsers>
-      <li>TableMending</li>
-      <li>CraftingSpot</li>
+      <li>ElectricTailoringBench</li>
+      <li>HandTailoringBench</li>
     </recipeUsers>
   </RecipeDef>
 

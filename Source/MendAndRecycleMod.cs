@@ -52,8 +52,8 @@ namespace MendAndRecycle
             // select and group ThingDefs by complexity
             var query = (
                 from def in DefDatabase<ThingDef>.AllDefs
-                where def.useHitPoints && (def.IsApparel ||  def.IsWeapon)
-                select new { def = def, isComplex = HasComponents(def), isApparel = def.IsApparel}
+                where def.useHitPoints && def.ingestible == null && (def.IsApparel ||  def.IsWeapon)
+                select new { def, isComplex = HasComponents(def), isApparel = def.IsApparel}
             );
 
             var mendComplexApparel = GetCleanFilter(ResourceBank.Recipe.MendComplexApparel);

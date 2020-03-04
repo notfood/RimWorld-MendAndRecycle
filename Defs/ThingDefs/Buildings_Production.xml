@@ -16,7 +16,7 @@
     </statBases>
   </ThingDef>
   
-  <ThingDef Name="BenchBase_MnR" ParentName="BuildingBase_MnR" Abstract="True">
+  <ThingDef Name="BenchBase_MnR" ParentName="BuildingBase" Abstract="True">
     <canOverlapZones>false</canOverlapZones>
     <minifiedDef>MinifiedThing</minifiedDef>
     <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
@@ -26,10 +26,6 @@
     <statBases>
       <Mass>20</Mass>
     </statBases>
-    <building>
-      <workSpeedPenaltyOutdoors>true</workSpeedPenaltyOutdoors>
-      <workSpeedPenaltyTemperature>true</workSpeedPenaltyTemperature>
-    </building>
     <interactionCellIcon>DiningChair</interactionCellIcon>
     <comps>
       <li>
@@ -45,7 +41,7 @@
     <defName>TableMending</defName>
     <label>mending workbench</label>
     <thingClass>Building_WorkTable</thingClass>
-    <description>A workbench equipped with all the tools required to mend and repair damaged items. Requires power and consumes mending kits. Mending kits can be made in the crafting spot first.</description>
+    <description>A workbench equipped with all the tools required to mend and repair damaged items. Requires power and consumes mending kits. Mending kits can be made in the tailoring benches.</description>
     <graphicData>
       <texPath>Things/Buildings/TableMending</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -116,6 +112,7 @@
     <designationHotKey>Misc2</designationHotKey>
     <placeWorkers>
       <li>PlaceWorker_ShowFacilitiesConnections</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
     </placeWorkers>
     <researchPrerequisites>
       <li>Mending</li>
