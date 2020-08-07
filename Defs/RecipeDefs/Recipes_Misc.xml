@@ -18,11 +18,11 @@
     <workAmount>100</workAmount>
     <effectWorking>Tailor</effectWorking>
     <soundWorking>Recipe_Tailor</soundWorking>
-    <fixedIngredientFilter>
+    <defaultIngredientFilter>
       <categories>
         <li>Apparel</li>
       </categories>
-    </fixedIngredientFilter>
+    </defaultIngredientFilter>
     <skillRequirements>
       <Crafting>4</Crafting>
     </skillRequirements>
@@ -36,11 +36,11 @@
     <workAmount>200</workAmount>
     <effectWorking>Tailor</effectWorking>
     <soundWorking>Recipe_Tailor</soundWorking>
-    <fixedIngredientFilter>
+    <defaultIngredientFilter>
       <categories>
         <li>Apparel</li>
       </categories>
-    </fixedIngredientFilter>
+    </defaultIngredientFilter>
     <skillRequirements>
       <Crafting>8</Crafting>
     </skillRequirements>
@@ -54,11 +54,11 @@
     <workAmount>50</workAmount>
     <effectWorking>Smith</effectWorking>
     <soundWorking>Recipe_Smith</soundWorking>
-    <fixedIngredientFilter>
+    <defaultIngredientFilter>
       <categories>
         <li>Weapons</li>
       </categories>
-    </fixedIngredientFilter>
+    </defaultIngredientFilter>
     <skillRequirements>
       <Crafting>4</Crafting>
     </skillRequirements>
@@ -72,11 +72,11 @@
     <workAmount>200</workAmount>
     <effectWorking>Smith</effectWorking>
     <soundWorking>Recipe_Smith</soundWorking>
-    <fixedIngredientFilter>
+    <defaultIngredientFilter>
       <categories>
         <li>Weapons</li>
       </categories>
-    </fixedIngredientFilter>
+    </defaultIngredientFilter>
     <skillRequirements>
       <Crafting>8</Crafting>
     </skillRequirements>
