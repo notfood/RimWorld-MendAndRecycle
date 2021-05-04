@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+  
+	<!-- EN: mend -->
+	<DoBillsMending.label>réparer les choses endommagées</DoBillsMending.label> 
+	
+	<!-- EN: mending -->
+	<DoBillsMending.gerund>répare</DoBillsMending.gerund>
+	
+	<!-- EN: mend -->	
+	<DoBillsMending.verb>réparer</DoBillsMending.verb> 
+
+</LanguageData>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<LanguageData>
+
+	<!-- EN: Mending TargetB. -->
+	<Mend.reportString>Répare TargetB.</Mend.reportString> 
+
+	<!-- EN: Recycling TargetB. -->
+	<Recycle.reportString>Recycle TargetB.</Recycle.reportString> 
+
+</LanguageData>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+  
+	<!-- EN: make mending kits -->
+	<MakeMendingKit.label>faire un kit de réparation</MakeMendingKit.label> 
+	
+	<!-- EN: Crafts mending kits from materials. Produces enough to re-stock the mending table. -->
+	<MakeMendingKit.description>Création d'un kit de réparation à partir de matériaux. Crée suffisamment de kits pour alimenter l'atelier de réparation.</MakeMendingKit.description>
+	
+	<!-- EN: Crafting mending kit. -->
+	<MakeMendingKit.jobString>Fait un kit de réparation</MakeMendingKit.jobString> 
+	
+</LanguageData>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+
+  <MendRecycle>MendAndRecycle</MendRecycle>
+
+  <!-- Settings -->
+
+  <!-- EN: Removes Deadman from Apparel -->
+  <MendRecycle.RemovesDeadman>Supprimer la marque "porté par un mort" des vêtements</MendRecycle.RemovesDeadman>
+
+  <!-- EN: Does fully fixing an apparel in the mending table remove the deadman tag? -->
+  <MendRecycle.RemovesDeadmanTooltip>Supprime la marque "porté par un mort" des vêtements</MendRecycle.RemovesDeadmanTooltip>
+
+  <!-- EN: Requires Fuel -->
+  <MendRecycle.RequiresFuel>Besoin de kits de réparation</MendRecycle.RequiresFuel>
+
+  <!-- EN: Does the mending table need mending kits? (Needs restart) -->
+  <MendRecycle.RequiresFuelTooltip>Ai-je besoin de kits de réparation d'établi? (Redémarrage requis)</MendRecycle.RequiresFuelTooltip>
+
+  <!-- EN: Requires Power -->
+  <MendRecycle.RequiresPower>Besoin de courant</MendRecycle.RequiresPower>
+
+  <!-- EN: Does the mending table require power? (Needs restart) -->
+  <MendRecycle.RequiresPowerTooltip>Ai-je besoin d'électricité pour travailler sur un atelier de réparation? (Redémarrage requis)</MendRecycle.RequiresPowerTooltip>
+
+  <!-- EN: Percentage of Max Hit Points in play -->
+  <MendRecycle.MaxHPCost>Taux de réparation / recyclage, pourcentage de la durabilité maximale de l'article.</MendRecycle.MaxHPCost>
+
+  <!-- EN: Fail Chance per Tech Level -->
+  <MendRecycle.FailChances>Risque d'erreur, en fonction du niveau de développement actuel</MendRecycle.FailChances>
+  
+</LanguageData>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+  
+	<!-- EN: mending kit -->
+	<MendingKit.label>trousse de réparation</MendingKit.label> 
+	
+	<!-- EN: Miscellaneous cloth, bits and parts. Necessary for repairing weapons and mending apparel. -->
+	<MendingKit.description>Tissus, mors et pièces divers. Nécessaire pour réparer les armes et les vêtements.</MendingKit.description> 
+	
+</LanguageData>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+
+	<!-- EN: mend simple apparel -->
+	<MendSimpleApparel.label>réparer des vêtements simples</MendSimpleApparel.label> 
+	
+	<!-- EN: Mend simple apparel. -->
+	<MendSimpleApparel.description>Réparation de vêtements simples.</MendSimpleApparel.description> 
+	
+	<!-- EN: Mending. -->
+	<MendSimpleApparel.jobString>Répare des vêtements simples</MendSimpleApparel.jobString> 
+	
+	
+	<!-- EN: mend complex apparel -->
+	<MendComplexApparel.label>réparer des armures</MendComplexApparel.label> 
+	
+	<!-- EN: Mend armor. -->
+	<MendComplexApparel.description>Réparation d'armure.</MendComplexApparel.description> 
+	
+	<!-- EN: Mending. -->
+	<MendComplexApparel.jobString>répare</MendComplexApparel.jobString> 
+	
+	
+	<!-- EN: repair simple weapon -->
+	<MendSimpleWeapon.label>réparer des armes simples</MendSimpleWeapon.label> 
+	
+	<!-- EN: Repair weapon. -->
+	<MendSimpleWeapon.description>Réparation d'armes simples.</MendSimpleWeapon.description> 
+	
+	<!-- EN: Repairing. -->
+	<MendSimpleWeapon.jobString>Répare des armes simples</MendSimpleWeapon.jobString> 
+	
+	
+	<!-- EN: repair complex weapon -->
+	<MendComplexWeapon.label>réparer des armes complexes</MendComplexWeapon.label> 
+	
+	<!-- EN: Repair weapon. -->
+	<MendComplexWeapon.description>Réparation d'arme complexes.</MendComplexWeapon.description> 
+	
+	<!-- EN: Repairing. -->
+	<MendComplexWeapon.jobString>Répare des armes complexes</MendComplexWeapon.jobString> 
+	
+	
+	<!-- EN: recycle apparel -->
+	<RecycleApparel.label>recycler des vêtements</RecycleApparel.label> 
+	
+	<!-- EN: Recycle apparel into their basic components. -->
+	<RecycleApparel.description>Transformation des vêtements en leurs composants constitutifs.</RecycleApparel.description> 
+	
+	<!-- EN: Recycling. -->
+	<RecycleApparel.jobString>recycle</RecycleApparel.jobString> 
+  
+</LanguageData>

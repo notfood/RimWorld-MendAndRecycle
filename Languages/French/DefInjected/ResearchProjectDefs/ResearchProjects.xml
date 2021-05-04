@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+  
+	<!-- EN: Mending -->
+	<Mending.label>Réparations</Mending.label> 
+	
+	<!-- EN: Mend and repair damaged items. -->
+	<Mending.description>Réparation d'articles endommagés.</Mending.description> 
+	
+</LanguageData>
