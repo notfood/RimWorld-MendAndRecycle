@@ -10,6 +10,7 @@
     <researchViewX>2.00</researchViewX>
     <researchViewY>0.95</researchViewY>
     <prerequisites>
+      <li>ComplexClothing</li>
       <li>Electricity</li>
     </prerequisites>
   </ResearchProjectDef>
