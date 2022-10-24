@@ -38,7 +38,7 @@ namespace MendAndRecycle
             yield return Toils_Reserve.Reserve(BillGiverInd, 1);
             yield return Toils_Reserve.ReserveQueue(IngredientInd, 1);
             yield return Toils_JobTransforms.ExtractNextTargetFromQueue(IngredientInd);
-            yield return Toils_Goto.GotoThing(IngredientInd, PathEndMode.Touch);
+            yield return Toils_Goto.GotoThing(IngredientInd, PathEndMode.ClosestTouch);
             yield return Toils_Haul.StartCarryThing(IngredientInd);
             yield return Toils_Goto.GotoThing(BillGiverInd, PathEndMode.InteractionCell);
             yield return Toils_JobTransforms.SetTargetToIngredientPlaceCell(BillGiverInd, IngredientInd, IngredientPlaceCellInd);
