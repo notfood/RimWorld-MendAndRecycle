@@ -66,7 +66,7 @@ namespace MendAndRecycle
                     float skillPerc = 0.5f;
 
                     var skillDef = job.RecipeDef.workSkill;
-                    if (skillDef != null) {
+                    if (skillDef != null && pawn.skills != null) {
                         var skill = pawn.skills.GetSkill (skillDef);
 
                         if (skill != null) {
