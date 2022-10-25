@@ -75,7 +75,7 @@ namespace MendAndRecycle
                         }
                         else
                         {
-                            Log.ErrorOnce("Unknown store mode", 9158246, false);
+                            Log.ErrorOnce("Unknown store mode", 9158246);
                         }
                         if (vec.IsValid)
                         {

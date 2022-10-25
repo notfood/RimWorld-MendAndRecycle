@@ -10,13 +10,8 @@
         <DebugType>None</DebugType>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="Assembly-CSharp">
-            <HintPath>..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine">
-            <HintPath>..\..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
+        <PackageReference Include="Krafs.Rimworld.Ref">
+            <Version>1.4.*</Version>
+        </PackageReference>
     </ItemGroup>
 </Project>
