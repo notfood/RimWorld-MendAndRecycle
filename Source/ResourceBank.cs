@@ -16,6 +16,8 @@ namespace MendAndRecycle
 
             public static readonly string RemovesDeadman = TL("RemovesDeadman");
             public static readonly string RemovesDeadmanTooltip = TL("RemovesDeadmanTooltip");
+            public static readonly string UseTableMending = TL("UseTableMending");
+            public static readonly string UseTableMendingTooltip = TL("UseTableMendingTooltip");
             public static readonly string RequiresFuel = TL("RequiresFuel");
             public static readonly string RequiresFuelTooltip = TL("RequiresFuelTooltip");
             public static readonly string RequiresPower = TL("RequiresPower");

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-
+﻿using System.Linq;
+using HarmonyLib;
 using RimWorld;
 using Verse;
+using Verse.AI;
 
 namespace MendAndRecycle
 {
@@ -13,6 +13,8 @@ namespace MendAndRecycle
             GetSettings<Settings>();
 
             LongEventHandler.ExecuteWhenFinished(Inject);
+
+            Patch();
         }
 
         public override string SettingsCategory()
@@ -22,11 +24,43 @@ namespace MendAndRecycle
 
         public override void DoSettingsWindowContents(UnityEngine.Rect inRect) => Settings.DoSettingsWindowContents(inRect);
 
+        static void Patch()
+        {
+            var harmony = new Harmony("notfood.mendandrecycle");
+
+            harmony.Patch(AccessTools.Method(typeof(WorkGiver_DoBill), "StartOrResumeBillJob"), 
+                postfix: new HarmonyMethod(typeof(MendAndRecycleMod), nameof(ReplaceJob)));
+        }
+
+        static Job ReplaceJob(Job __result)
+        {
+            if (__result?.RecipeDef.Worker is RecipeWorkerWithJob_Mend worker)
+            {
+                return new Job(ResourceBank.Job.Mend, __result.targetA)
+                {
+                    targetQueueB = __result.targetQueueB,
+                    countQueue = __result.countQueue,
+                    haulMode = __result.haulMode,
+                    bill = __result.bill
+                };
+            }
+
+            return __result;
+        }
+
         static void Inject()
         {
+            if (!Settings.useTableMending)
+            {
+                RemoveTable();
+            }
             if (!Settings.requiresFuel)
             {
                 RemoveFuel();
+            }
+            if (!Settings.useTableMending || !Settings.requiresFuel)
+            {
+                RemoveKits();
             }
             if (!Settings.requiresPower)
             {
@@ -36,10 +70,38 @@ namespace MendAndRecycle
             SortApparelsInComplexity();
         }
 
+        static void RemoveTable()
+        {
+            ResourceBank.Thing.TableMending.designationCategory = null;
+
+            var mendApparel = new [] {ResourceBank.Recipe.MendSimpleApparel, ResourceBank.Recipe.MendComplexApparel};
+            var mendWeapon = new [] {ResourceBank.Recipe.MendSimpleWeapon, ResourceBank.Recipe.MendComplexWeapon};
+
+            foreach (var recipe in ResourceBank.Thing.TableMending.AllRecipes)
+            {
+                if (mendApparel.Contains(recipe))
+                {
+                    recipe.recipeUsers = ThingDefOf.Apparel_Parka.recipeMaker.recipeUsers;
+                }
+                else if (mendWeapon.Contains(recipe))
+                {
+                    recipe.recipeUsers = ThingDefOf.Piano.recipeMaker.recipeUsers;
+                }
+                else
+                {
+                    recipe.recipeUsers = ThingDefOf.Apparel_ShieldBelt.recipeMaker.recipeUsers;
+                }
+            }
+        }
+
         static void RemoveFuel()
         {
-            ResourceBank.Recipe.MakeMendingKit?.recipeUsers?.Clear();
             ResourceBank.Thing.TableMending?.comps?.RemoveAll(p => p.GetType() == typeof(CompProperties_Refuelable));
+        }
+
+        static void RemoveKits()
+        {
+            ResourceBank.Recipe.MakeMendingKit?.recipeUsers?.Clear();
         }
 
         static void RemovePower()
