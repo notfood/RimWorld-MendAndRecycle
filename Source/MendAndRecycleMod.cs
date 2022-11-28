@@ -34,7 +34,7 @@ namespace MendAndRecycle
 
         static Job ReplaceJob(Job __result)
         {
-            if (__result?.RecipeDef.Worker is RecipeWorkerWithJob_Mend worker)
+            if (__result?.RecipeDef?.Worker is RecipeWorkerWithJob_Mend worker)
             {
                 return new Job(ResourceBank.Job.Mend, __result.targetA)
                 {
