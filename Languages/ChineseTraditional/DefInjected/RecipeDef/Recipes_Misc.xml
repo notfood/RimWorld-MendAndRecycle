@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MendSimpleApparel.label>修補基礎服裝</MendSimpleApparel.label>
+  <MendSimpleApparel.description>修補基礎服裝。</MendSimpleApparel.description>
+  <MendSimpleApparel.jobString>修補。</MendSimpleApparel.jobString>
+
+  <MendComplexApparel.label>修補進階服裝</MendComplexApparel.label>
+  <MendComplexApparel.description>修補裝備。</MendComplexApparel.description>
+  <MendComplexApparel.jobString>修補。</MendComplexApparel.jobString>
+
+  <MendSimpleWeapon.label>修復基礎武器</MendSimpleWeapon.label>
+  <MendSimpleWeapon.description>修復武器。</MendSimpleWeapon.description>
+  <MendSimpleWeapon.jobString>正在修復。</MendSimpleWeapon.jobString>
+
+  <MendComplexWeapon.label>修復進階武器</MendComplexWeapon.label>
+  <MendComplexWeapon.description>修復武器。</MendComplexWeapon.description>
+  <MendComplexWeapon.jobString>正在修復。</MendComplexWeapon.jobString>
+
+  <RecycleApparel.label>回收服裝</RecycleApparel.label>
+  <RecycleApparel.description>將服裝回收成原料。</RecycleApparel.description>
+  <RecycleApparel.jobString>回收。</RecycleApparel.jobString>
+
+
+</LanguageData>

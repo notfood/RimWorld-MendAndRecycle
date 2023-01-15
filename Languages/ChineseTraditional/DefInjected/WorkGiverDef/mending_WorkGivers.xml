@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <DoBillsMending.label>修補</DoBillsMending.label>
+  <DoBillsMending.verb>修補</DoBillsMending.verb>
+  <DoBillsMending.gerund>修補</DoBillsMending.gerund>
+
+  <DoBillsMakeApparel.label>製作服裝</DoBillsMakeApparel.label>
+  <DoBillsMakeApparel.verb>裁縫</DoBillsMakeApparel.verb>
+  <DoBillsMakeApparel.gerund>裁縫</DoBillsMakeApparel.gerund>
+
+</LanguageData>
