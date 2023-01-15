@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <MendRecycle>修補和回收</MendRecycle>
+
+  <!-- Settings -->
+  <MendRecycle.RemovesDeadman>移除汙染</MendRecycle.RemovesDeadman>
+  <MendRecycle.RemovesDeadmanTooltip>在修補台中完全修復後，是否能去除汙染標籤？</MendRecycle.RemovesDeadmanTooltip>
+  
+  <MendRecycle.UseTableMending>使用修補台</MendRecycle.UseTableMending>
+  <MendRecycle.UseTableMendingTooltip>是否使用修補台？ (需要重啟)</MendRecycle.UseTableMendingTooltip>
+  <MendRecycle.RequiresFuel>需要燃料</MendRecycle.RequiresFuel>
+  <MendRecycle.RequiresFuelTooltip>修補台需要修補工具嗎？ （需要重啟）</MendRecycle.RequiresFuelTooltip>
+  <MendRecycle.RequiresPower>需要電源</MendRecycle.RequiresPower>
+  <MendRecycle.RequiresPowerTooltip>修補台需要電力嗎？ （需要重啟）</MendRecycle.RequiresPowerTooltip>
+
+  <MendRecycle.MaxHPCost>遊戲中最大生命值的百分比</MendRecycle.MaxHPCost>
+  <MendRecycle.FailChances>等級失敗機率</MendRecycle.FailChances>
+</LanguageData>
