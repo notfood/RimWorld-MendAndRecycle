@@ -33,10 +33,10 @@ namespace MendAndRecycle
         {
             base.ExposeData();
 
-            Scribe_Values.Look(ref removesDeadman, "removesDeadman", true, true);
-            Scribe_Values.Look(ref useTableMending, "useTableMending", true, true);
-            Scribe_Values.Look(ref requiresFuel, "requiresFuel", true, true);
-            Scribe_Values.Look(ref requiresPower, "requiresPower", true, true);
+            Scribe_Values.Look(ref removesDeadman, "removesDeadman", defaultValue: true, forceSave: true);
+            Scribe_Values.Look(ref useTableMending, "useTableMending", defaultValue: true, forceSave: true);
+            Scribe_Values.Look(ref requiresFuel, "requiresFuel", defaultValue: true, forceSave: true);
+            Scribe_Values.Look(ref requiresPower, "requiresPower", defaultValue: true, forceSave: true);
 
             Scribe_Values.Look(ref costFromMaxHitPoints, "costFromMaxHitPoints", 0.1f, true);
 

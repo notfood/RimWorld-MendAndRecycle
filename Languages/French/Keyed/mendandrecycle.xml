@@ -11,12 +11,6 @@
 
   <!-- EN: Does fully fixing an apparel in the mending table remove the deadman tag? -->
   <MendRecycle.RemovesDeadmanTooltip>Supprime la marque "porté par un mort" des vêtements</MendRecycle.RemovesDeadmanTooltip>
-  
-  <!-- EN: Uses Mending Table -->
-  <MendRecycle.UseTableMending>Utilise de réparation d'établi</MendRecycle.UseTableMending>
-  
-  <!-- EN: Does it use the mending table? (Needs restart) -->
-  <MendRecycle.UseTableMendingTooltip>Utilise-t-il de réparation d'établi? (Redémarrage requis)</MendRecycle.UseTableMendingTooltip>
 
   <!-- EN: Requires Fuel -->
   <MendRecycle.RequiresFuel>Besoin de kits de réparation</MendRecycle.RequiresFuel>
