@@ -71,7 +71,8 @@ namespace MendAndRecycle
                         }
                         else if (job.bill.GetStoreMode() == BillStoreModeDefOf.SpecificStockpile)
                         {
-                            StoreUtility.TryFindBestBetterStoreCellForIn(objectThing, pawn, pawn.Map, StoragePriority.Unstored, pawn.Faction, job.bill.GetStoreZone().slotGroup, out vec, true);
+                            
+                            StoreUtility.TryFindBestBetterStoreCellForIn(objectThing, pawn, pawn.Map, StoragePriority.Unstored, pawn.Faction, job.bill.GetSlotGroup(), out vec, true);
                         }
                         else
                         {
